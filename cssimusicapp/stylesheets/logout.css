@@ -1,0 +1,26 @@
+html {
+  background-image: url('/images/background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+.container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.container #user-logout-title {
+  text-align: center;
+  color: white;
+}
+
+.container #comeback {
+  text-align: center;
+  color: white;
+}

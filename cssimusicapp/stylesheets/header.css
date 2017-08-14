@@ -1,0 +1,39 @@
+.header {
+	position: relative;
+	left: 0%;
+	top: 0%;
+	width: 100%;
+	overflow: hidden;
+	height: 65px;
+  background-color: rgb(40, 55, 71);
+}
+
+
+.header ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		height: 65px;
+    clear: both;
+}
+
+.header li a {
+	display: block;
+	text-align: center;
+	padding: 24px 20px;
+	text-decoration: none;
+	color: white;
+}
+
+.header #left {
+  float: left;
+}
+
+.header #center {
+	overflow: hidden;
+}
+
+.header #right {
+  float: right;
+}

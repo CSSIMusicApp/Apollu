@@ -1,0 +1,58 @@
+.container form {
+  width: 550px;
+  height: 550px;
+  background: linear-gradient(rgb(28, 58, 130), rgb(49, 119, 137));
+  overflow: hidden;
+}
+
+#title {
+  text-align: center;
+  color: white;
+}
+
+.signup-form {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+}
+
+.signup-form input {
+  width: 100%;
+  height: 35px;
+  background: transparent;
+}
+
+.signup-form input::-webkit-input-placeholder {
+  color: white;
+  text-align: center;
+}
+
+#username-title {
+  text-align: center;
+  color: white;
+}
+
+#password-title {
+  text-align: center;
+  color: white;
+}
+
+#interests-title {
+  text-align: center;
+  color: white;
+}
+
+#submit-button {
+  height: 25px;
+}
+
+#account-checker {
+  text-align: center;
+  color: white;
+}
+
+#account-checker a {
+  color: white;
+}

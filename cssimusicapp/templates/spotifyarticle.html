@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{article_name}}</title>
+  </head>
+  <body>
+    {%for article in articles%}
+    <h1>Article Name: {{ article.article_name }}</h1>
+    <h2>Tags: {{ article.tags }}</h2>
+    <p>Post: <iframe src = "https://open.spotify.com/embed?uri={{article.data}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe</p>
+    {%endfor%}
+  </body>
+</html>

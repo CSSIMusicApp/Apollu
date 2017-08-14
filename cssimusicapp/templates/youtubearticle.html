@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{article_name}}</title>
+  </head>
+  <body>
+    {%for article in articles%}
+    <h1>Article Name: {{ article.article_name }}</h1>
+    <h2>Tags: {{ article.tags }}</h2>
+    <p>Post: <iframe id="ytplayer" type="text/html" width="640" height="360"
+  src="https://www.youtube.com/embed/{{ article.data }}"
+  frameborder="0"></iframe></p>
+    {%endfor%}
+  </body>
+</html>

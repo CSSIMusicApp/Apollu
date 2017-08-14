@@ -1,0 +1,30 @@
+html {
+  background-image: url('/images/background.png');
+  background-size: auto;
+  background-repeat: no-repeat;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.articles {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.articles #article-name {
+  text-align: center;
+  color: white;
+}
+
+.articles #article-tags {
+  text-align: center;
+  color: white;
+}
+
+.articles #article-post {
+  text-align: center;
+  color: white;
+}
