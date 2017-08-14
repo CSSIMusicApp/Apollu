@@ -20,12 +20,8 @@ import webapp2
 import jinja2
 import urllib2
 import datetime
+from models import User, Article, ArticleCreatorHandler, UserCreatorHandler, LogOutHandler
 from google.appengine.api import users
-from Models.article import Article
-from Models.user import User
-from Models.article_creator import ArticleCreatorHandler
-from Models.user_creator import UserCreatorHandler
-from Models.logout_handler import LogOutHandler
 
 
 
