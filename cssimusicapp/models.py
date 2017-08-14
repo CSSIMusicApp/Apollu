@@ -4,8 +4,10 @@ import urllib2
 import datetime
 from google.appengine.ext import ndb
 from google.appengine.api import users
+from random import *
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
+user = users.get_current_user()
 
 class Article(ndb.Model):
     article_name = ndb.StringProperty()
@@ -13,7 +15,7 @@ class Article(ndb.Model):
     post = ndb.StringProperty()
     date = ndb.DateTimeProperty(auto_now_add=True)
     comments = ndb.StringProperty(repeated=True)
-    user = ndb.KeyProperty()
+    id = ndb.IntegerProperty()
 
 class Friends(ndb.Model):
     follower = ndb.KeyProperty()
@@ -54,11 +56,23 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
             template = env.get_template('spotifyarticle.html')
             articledata = spotifyinput
 
+        # i=0
+        # while i<1:
+        #     idtemp = randint(0, 10001)
+        #
+        #     if not Article.query(Article.id == idtemp).article_name:
+        #         i=0
+        #     else:
+        #         i=1
+
             #change with database info
+        idtemp = randint(0, 1000001)
+
         article = Article(
             article_name = self.request.get('article_name'),
             post = articledata,
-            date = datetime.datetime.now()
+            date = datetime.datetime.now(),
+            id = idtemp
         )
 
         article.put()

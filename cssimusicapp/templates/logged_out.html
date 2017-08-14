@@ -3,21 +3,28 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/stylesheets/header.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
     <link rel="stylesheet" href="/stylesheets/logout.css">
     <title>Logged Out</title>
   </head>
   <body>
-    <div class="header">
-      <ul>
-        <li id="left"><a href="/">{{title}}</a></li>
-        <!-- Google Login first, then account creation, log out, check if user is already logged in our not -->
-        {{login}}
-        {{post_label}}
-      </ul>
-    </div>
+    <header>
+      <div class="header-content">
+        <div id="friends">Friends</div>
+        <div id="apollu"><a href="/">Apollu</a></div>
+        <div id="interests">Interests</div>
+      </div>
+    </header>
     <div class="container">
       <h1 id="user-logout-title">Hey {{username}}! You have sucessfully logged out!</h1>
       <p id="comeback">Come back and get updated soon!</p>
+    </div>
+    <div id="footer">
+      <ul id="footer-ui">
+        {{post_label}}
+        {{profile_label}}
+        {{login}}
+      </ul>
     </div>
   </body>
 </html>

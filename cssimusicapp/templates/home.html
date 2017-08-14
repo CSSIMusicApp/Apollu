@@ -12,18 +12,11 @@
   </head>
   <body>
     <header>
-      <!-- <ul>
-        <li id="left"><a href="/">Friends</a></li>
-       Google Login first, then account creation, log out, check if user is already logged in our not -->
-        <!-- <li id="center"><a href="/">Apollu</a></li>
-        <li id="right"><a href="/">Interests</a></li>
-      </ul> -->
       <div class="header-content">
         <div id="friends">Friends</div>
-        <div id="apollu">Apollu</div>
+        <div id="apollu"><a href="/">Apollu</a></div>
         <div id="interests">Interests</div>
       </div>
-
     </header>
     <div class="flex-container1">
       <div class="flex-item1">
@@ -56,9 +49,9 @@
     </div>
     <div id="footer">
       <ul id="footer-ui">
-        <li id="menu"><a href="#">Post</a></li>
-        <li id="menu"><a href="#">Profile</a></li>
-        <li id="menu-right"><a href="#">Login</a></li>
+        {{post_label}}
+        {{profile_label}}
+        {{login}}
       </ul>
     </div>
   </body>

@@ -29,8 +29,10 @@ header #friends {
 	left: 3%;
 }
 
-header #apollu {
+header #apollu a {
 	position: absolute;
+	text-decoration: none;
+	color: white;
 	left: 47%;
 }
 

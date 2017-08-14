@@ -1,15 +1,12 @@
 html {
-  background-image: url('/images/background.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 100%;
-  margin: 0;
-  padding: 0;
+  -ms-text-size-adjust:100%;
+  -webkit-text-size-adjust:100%;
+  background: rgb(93, 115, 139);
 }
 
 
 .container {
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

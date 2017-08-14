@@ -42,6 +42,7 @@ class MainHandler(webapp2.RequestHandler):
             #print('Common Data: %d') %(common_data)
 
             article_data = Article.query().order(-Article.date).fetch()
+            #print article_key
 
             for user in user_data:
                 user = {
@@ -54,14 +55,16 @@ class MainHandler(webapp2.RequestHandler):
                 article = {
                     'article_name': article.article_name,
                     'tags': article.tags,
-                    'post': article.post
+                    'post': article.post,
+                    'user': user
                 }
                 articles.append(article)
 
             vars = {
                 "title": "Name",
-                "login": '<li id="right"><a href="%s">Log Out</a></li>' %(users.create_logout_url('/loggedout')),
-                "post_label": '<li id="right"><a href="%s">Post</a></li>' %('/createarticle'),
+                "login": '<li id="menu"><a href="%s">Log Out</a></li>' %(users.create_logout_url('/loggedout')),
+                "post_label": '<li id="menu"><a href="%s">Post</a></li>' %('/createarticle'),
+                "profile_label": '<li id="menu"><a href="%s">Profile</a></li>' %('/profile'),
                 "users": page_users,
                 "articles": articles
             }
@@ -82,7 +85,8 @@ class MainHandler(webapp2.RequestHandler):
                 article = {
                     'article_name': article.article_name,
                     'tags': article.tags,
-                    'post': article.post
+                    'post': article.post,
+                    'user': user
                 }
                 articles.append(article)
 
@@ -90,6 +94,7 @@ class MainHandler(webapp2.RequestHandler):
                 "title": "Name",
                 "login": '<li id="right"><a href="%s">Log In</a></li>' %(users.create_login_url('/usercreate')),
                 "post_label": '<li></li>',
+                "profile_label": '<li></li>',
                 "users": page_users,
                 "articles": articles
             }
