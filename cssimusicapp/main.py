@@ -23,9 +23,6 @@ import datetime
 from models import User, Article, ArticleCreatorHandler, UserCreatorHandler, LogOutHandler
 from google.appengine.api import users
 
-
-
-
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
 class MainHandler(webapp2.RequestHandler):

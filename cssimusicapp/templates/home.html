@@ -2,55 +2,64 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <!-- Latest compiled and minified CSS -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="/stylesheets/header.css">
     <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <!-- Latest compiled and minified CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" target="_blank"></script>
-    <title>{{title}}</title>
+    <title>Apollu</title>
   </head>
   <body>
-    <div class="header">
-      <ul>
-        <li id="left"><a href="/">{{title}}</a></li>
-        <!-- Google Login first, then account creation, log out, check if user is already logged in our not -->
-        {{login}}
-        {{post_label}}
-      </ul>
-    </div>
-    <div class="container-fluid" id="content">
-      <div class="row">
-        <div class="col-md-3" id="user-header">
-           <div class="users">
-             <ul>
-               {% for user in users %}
-               <h3>Username: {{user.username}}</h3>
-               {% endfor %}
-             </ul>
-           </div>
-         </div>
-         <div class="col-md-6" id="articles-header">
-           <div class="articles">
-             <ul>
-               {%for article in articles%}
-               <h1>Article Name: {{ article.article_name }}</h1>
-               <h2>Tags: {{ article.tags }}</h2>
-               <li>Post: {{ article.post }}</li>
-               {% endfor %}
-             </ul>
-           </div>
-        </div>
-        <div class="col-md-3" id="interests-header">
-            <div class="interests">
-              {%for user in users%}
-              <h3>Interests: {{ user.interests }}<h3>
-              {%endfor%}
-            </div>
-        </div>
+    <header>
+      <!-- <ul>
+        <li id="left"><a href="/">Friends</a></li>
+       Google Login first, then account creation, log out, check if user is already logged in our not -->
+        <!-- <li id="center"><a href="/">Apollu</a></li>
+        <li id="right"><a href="/">Interests</a></li>
+      </ul> -->
+      <div class="header-content">
+        <div id="friends">Friends</div>
+        <div id="apollu">Apollu</div>
+        <div id="interests">Interests</div>
+      </div>
+
+    </header>
+    <div class="flex-container1">
+      <div class="flex-item1">
+        <div id="title"></div>
+        <ul>{%for user in users%}
+          <div class="">{{user.image}}</div>
+          <h1>{{user.username}}</h1>
+          {%endfor%}
+        </ul>
+        <br>
+      </div>
+      <div class="flex-item2">
+        <div id="title"></div>
+        {%for article in articles %}
+          <ul>
+            <div id="article_data">{{article.date}}</div>
+            <h1>{{article.article_name}}</h1>
+            <h3>{{article.post}}</h3>
+          </ul>
+        {%endfor%}
+      </div>
+      <div class="flex-item3">
+        <div id="title"></div>
+        {%for user in users%}
+        <ul>
+          <h1>{{user.interests}}</h1>
+        </ul>
+        {%endfor%}
       </div>
     </div>
-    <div class="footer">
+    <div id="footer">
+      <ul id="footer-ui">
+        <li id="menu"><a href="#">Post</a></li>
+        <li id="menu"><a href="#">Profile</a></li>
+        <li id="menu-right"><a href="#">Login</a></li>
+      </ul>
     </div>
   </body>
 </html>
