@@ -118,3 +118,23 @@ class LogOutHandler(webapp2.RequestHandler):
         }
         template = env.get_template('logged_out.html')
         self.response.write(template.render(vars))
+
+class ProfileHandler(webapp2.RequestHandler):
+    def get(self):
+        usersname = self.request.get('name')
+        usergrabbed = User.query(User.username == usersname)
+        user = usergrabbed.get()
+        vars = {
+        "name": user.username,
+        "interests": user.interests,
+        #Friends
+        #articles
+        #profile pictures
+
+        "title": "Name",
+        "login": '<li id="right"><a href="%s">Log In</a></li>' %(users.create_login_url('/usercreate')),
+        "post_label": '<li></li>',
+        "profile_label": '<li></li>',
+        }
+        template = env.get_template('profile.html')
+        self.response.write(template.render(vars))
