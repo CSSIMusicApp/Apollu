@@ -8,6 +8,10 @@ body{
  background: rgb(93, 115, 139);
 }
 
+#apollu {
+  display: none;
+}
+
 .flex-container1 {
    display: inline-block;
    height: 100%;
