@@ -1,60 +1,60 @@
 html{
-  -ms-text-size-adjust:100%;
-  -webkit-text-size-adjust:100%;
+ -ms-text-size-adjust:100%;
+ -webkit-text-size-adjust:100%
 }
 
 body{
-  margin:0;
-  background: rgb(93, 115, 139);
+ margin:0;
+ background: rgb(93, 115, 139);
 }
 
 .flex-container1 {
-    display: inline-block;
-    height: 100%;
-    width: 100%;
-    background: rgb(93, 115, 139);
+   display: inline-block;
+   height: 100%;
+   width: 100%;
+   background: rgb(93, 115, 139);
 
 }
 
 .flex-item1 {
-    height: 100%;
-    width: 33.33%;
-    background: transparent;
-    color: white;
-    font-size: 17px;
-    float: left;
+   height: 100%;
+   width: 33.33%;
+   background: transparent;
+   color: white;
+   font-size: 17px;
+   float: left;
 }
 
 .flex-item2 {
-  height: 100%;
-    width: 33.33%;
-    background: transparent;
-    color: white;
-    font-size: 17px;
-    float: left;
+ height: 100%;
+   width: 33.33%;
+   background: transparent;
+   color: white;
+   font-size: 17px;
+   float: left;
 }
 
 .flex-item3 {
-    height: 100%;
-    width: 33.33%;
-    background: transparent;
-    color: white;
-    font-size: 17px;
-    float: right;
+   height: 100%;
+   width: 33.33%;
+   background: transparent;
+   color: white;
+   font-size: 17px;
+   float: right;
 }
 
 
 .flex-item2 ul {
-  padding: 0;
-  text-align: center;
+ padding: 0;
+ text-align: center;
 }
 
 .flex-item3 ul {
-  padding: 0;
-  text-align: center;
+ padding: 0;
+ text-align: center;
 
 }
 
 #title {
-  text-align: center;
+ text-align: center;
 }

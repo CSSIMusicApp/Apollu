@@ -1,43 +1,57 @@
 header {
-	position: relative;
-	top: 0%;
-	left: 0%;
-	right: 0%;
-	height: 65px;
-  background: rgb(40, 55, 71);
+    position: relative;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    height: 65px;
+ background: rgb(40, 55, 71);
+    font-family: 'Raleway', sans-serif;
 }
 
 header .header-content {
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		overflow: hidden;
-		height: 65px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  	height: 65px;
     clear: both;
 }
 
 .header-content div {
-	display: block;
-	text-align: center;
-	padding: 24px 20px;
-	text-decoration: none;
-	color: white;
+    display: block;
+    text-align: center;
+    padding: 24px 20px;
+    text-decoration: none;
+    color: white;
 }
 
 header #friends {
-	position: absolute;
-	left: 3%;
+    position: absolute;
+    left: 3%;
+    margin: 0px;
+    padding: 0px;
+    padding-top: 25px;
+    font-size: 18px;
+}
+
+header #apollu {
+    position: absolute;
+    left: 47%;
+    font-size: 30px;
+    margin: 0px 0px;
+    padding: 0px;
+    padding-top: 16px;
 }
 
 header #apollu a {
-	position: absolute;
 	text-decoration: none;
 	color: white;
-	left: 47%;
 }
 
 header #interests {
-	position: absolute;
-	margin-left: 81%;
-	top: 0.01px;
+    position: absolute;
+    margin-left: 81%;
+    top: 0.01px;
+    padding-top: 25px;
+    font-size: 18px;
 }
