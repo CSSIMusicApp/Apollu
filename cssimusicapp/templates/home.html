@@ -44,7 +44,9 @@
        <div id="title"></div>
        {%for user in users%}
        <ul>
-         <h1>{{user.interests}}</h1>
+         {%for interest in user.interests%}
+         <h1>{{interest}}</h1>
+         {%endfor%}
        </ul>
        {%endfor%}
      </div>
