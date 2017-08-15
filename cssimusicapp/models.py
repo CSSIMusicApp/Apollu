@@ -95,10 +95,9 @@ class UserCreatorHandler(webapp2.RequestHandler):
 
     #post change
     def post(self):
-
         user = User(
             username = self.request.get('username'),
-            interests = list(self.request.get('interests')),
+            interests = [str(self.request.get('interests'))],
             email = self.request.get('email')
         )
 
