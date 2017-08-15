@@ -2,15 +2,56 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>{{article_name}}</title>
+    <link rel="stylesheet" href="/stylesheets/header.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" target="_blank"></script>
+    <!-- <script src="/scripts/youtubeapi.js"></script> -->
+    <title>{{name}}</title>
   </head>
   <body>
-    {%for article in articles%}
-    <h1>Article Name: {{ article.article_name }}</h1>
-    <h2>Tags: {{ article.tags }}</h2>
-    <p>Post: <iframe id="ytplayer" type="text/html" width="640" height="360"
-  src="https://www.youtube.com/embed/{{ article.data }}"
-  frameborder="0"></iframe></p>
-    {%endfor%}
+    <h1>Article Name: {{ name }}</h1>
+    <h2>Tags: {{ tags }}</h2>
+    <div id="player"></div>
+    <script>
+    var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+        //    after the API code downloads.
+        var player;
+        function onYouTubeIframeAPIReady() {
+          player = new YT.Player('player', {
+            height: '390',
+            width: '640',
+            videoId: '{{ post }}',
+            events: {
+              'onReady': onPlayerReady,
+              // 'onStateChange': onPlayerStateChange
+            }
+          });
+        }
+
+        // 4. The API will call this function when the video player is ready.
+        function onPlayerReady(event) {
+          event.target.playVideo();
+        }
+
+        // 5. The API calls this function when the player's state changes.
+        //    The function indicates that when playing a video (state=1),
+        //    the player should play for six seconds and then stop.
+        // var done = false;
+        // function onPlayerStateChange(event) {
+        //   if (event.data == YT.PlayerState.PLAYING && !done) {
+        //     setTimeout(stopVideo, 6000);
+        //     done = true;
+        //   }
+        // }
+        function stopVideo() {
+          player.stopVideo();
+        }
+    </script>
   </body>
 </html>

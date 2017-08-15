@@ -5,6 +5,7 @@ import datetime
 from google.appengine.ext import ndb
 from google.appengine.api import users
 from random import *
+import logging
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 user = users.get_current_user()
@@ -157,8 +158,8 @@ class ArticleHandler(webapp2.RequestHandler):
 
         if article.articletype == "text":
             template = env.get_template('textarticle.html')
-        if article.articletype == "spotify":
+        elif article.articletype == "spotify":
             template = env.get_template('spotifyarticle.html')
-        if article.articletype == "youtube":
+        elif article.articletype == "youtube":
             template = env.get_template('youtubearticle.html')
         self.response.write(template.render(vars))
