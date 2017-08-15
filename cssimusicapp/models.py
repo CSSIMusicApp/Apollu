@@ -98,7 +98,7 @@ class UserCreatorHandler(webapp2.RequestHandler):
 
         user = User(
             username = self.request.get('username'),
-            interests = self.request.get('interests'),
+            interests = list(self.request.get('interests')),
             email = self.request.get('email')
         )
 
