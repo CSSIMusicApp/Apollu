@@ -15,6 +15,7 @@ class Article(ndb.Model):
     post = ndb.StringProperty()
     date = ndb.DateTimeProperty(auto_now_add=True)
     comments = ndb.StringProperty(repeated=True)
+    articletype = ndb.StringProperty()
     id = ndb.IntegerProperty()
 
 class Friends(ndb.Model):
@@ -46,14 +47,17 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
 
         if not spotifyinput and not youtubeinput:
             template = env.get_template('textarticle.html')
+            articletype = "text"
             articledata = textinput
 
         if not spotifyinput and not textinput:
             template = env.get_template('youtubearticle.html')
+            articletype = "youtube"
             articledata = youtubeinput
 
         if not textinput and not youtubeinput:
             template = env.get_template('spotifyarticle.html')
+            articletype = "spotify"
             articledata = spotifyinput
 
         # i=0
@@ -72,7 +76,8 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
             article_name = self.request.get('article_name'),
             post = articledata,
             date = datetime.datetime.now(),
-            id = idtemp
+            id = idtemp,
+            articletype = articletype
         )
 
         article.put()
@@ -136,4 +141,24 @@ class ProfileHandler(webapp2.RequestHandler):
         "profile_label": '<li></li>',
         }
         template = env.get_template('profile.html')
+        self.response.write(template.render(vars))
+
+class ArticleHandler(webapp2.RequestHandler):
+    def get(self):
+        articlename = self.request.get('name')
+        articlegrabbed = Article.query(Article.article_name == articlename)
+        article = articlegrabbed.get()
+
+        vars = {
+        "name": article.article_name,
+        "tags": article.tags,
+        "post": article.post
+        }
+
+        if article.articletype == "text":
+            template = env.get_template('textarticle.html')
+        if article.articletype == "spotify":
+            template = env.get_template('spotifyarticle.html')
+        if article.articletype == "youtube":
+            template = env.get_template('youtubearticle.html')
         self.response.write(template.render(vars))

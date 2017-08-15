@@ -16,11 +16,9 @@
     </div>
     <div class="container">
       <div class="articles">
-        {%for article in articles%}
-        <h1 id="article-name">Article Name: {{ article.article_name }}</h1>
-        <h2 id="article-tags">Tags: {{ article.tags }}</h2>
-        <p id="article-post">Post: {{ article.post }}</p>
-        {%endfor%}
+        <h1 id="article-name">Article Name: {{ name }}</h1>
+        <h2 id="article-tags">Tags: {{ tags }}</h2>
+        <p id="article-post">Post: {{ post }}</p>
       </div>
     </div>
     <div class="footer"></div>

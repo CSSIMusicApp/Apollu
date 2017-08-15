@@ -20,7 +20,7 @@ import webapp2
 import jinja2
 import urllib2
 import datetime
-from models import User, Article, ArticleCreatorHandler, UserCreatorHandler, LogOutHandler, ProfileHandler
+from models import User, Article, ArticleCreatorHandler, UserCreatorHandler, LogOutHandler, ProfileHandler, ArticleHandler
 from google.appengine.api import users
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
@@ -106,5 +106,6 @@ app = webapp2.WSGIApplication([
     ('/createarticle', ArticleCreatorHandler),
     ('/usercreate', UserCreatorHandler),
     ('/loggedout', LogOutHandler),
-    ('/profile', ProfileHandler)
+    ('/profile', ProfileHandler),
+    ('/article', ArticleHandler)
 ], debug=True)
