@@ -1,65 +1,5 @@
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="/stylesheets/header.css">
-  <link rel="stylesheet" href="/stylesheets/home.css">
-  <link rel="stylesheet" href="/stylesheets/footer.css">
-  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-  <!-- Latest compiled and minified CSS -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" target="_blank"></script>
-  <title>Apollu</title>
-</head>
-<body>
-  <header>
-    <div class="header-content">
-      <div id="friends">friends</div>
-      <div id="apollu">apollu</div>
-      <div id="interests">interests</div>
-    </div>
-
-  </header>
-  <div class="flex-container1">
-    <div class="flex-item1">
-      <div id="title"></div>
-      <ul>{%for user in users%}
-        <div class="">{{user.image}}</div>
-        <h1><a href = "/profile?name={{user.username}}">{{user.username}}</a></h1>
-        {%endfor%}
-      </ul>
-      <br>
-    </div>
-    <div class="flex-item2">
-      <div id="title"></div>
-      {%for article in articles %}
-        <ul>
-          <div id="article_data">{{article.date}}</div>
-          <h1>{{article.article_name}}</h1>
-          <!-- <p>{{article.post}}</p> -->
-          <!-- {% if article.articletype == 'youtube' %} -->
-             {{video_div}}
-          <!-- {% endif %} -->
-        </ul>
-      {%endfor%}
-    </div>
-    <div class="flex-item3">
-      <div id="title"></div>
-      <ul>
-        {%for interest in user.interests%}
-        <h1>{{interest}}</h1>
-        {%endfor%}
-      </ul>
-    </div>
-  </div>
-    <ul id="footer-ui">
-      {{ post_label }}
-      {{ profile_label }}
-      {{ login }}
-    </ul>
-</body>
-=======
  <head>
    <meta charset="utf-8">
    <link rel="stylesheet" href="/stylesheets/header.css">
@@ -74,9 +14,9 @@
  <body>
    <header>
      <div class="header-content">
-       <div id="friends">Friends</div>
-       <div id="apollu">Apollu</div>
-       <div id="interests">Interests</div>
+       <div id="friends">friends</div>
+       <div id="apollu">apollu</div>
+       <div id="interests">interests</div>
      </div>
 
    </header>
@@ -151,5 +91,4 @@
 
      </script>
  </body>
->>>>>>> 613f5d45054ecd51f01dc7720090dcc622a8a032
 </html>

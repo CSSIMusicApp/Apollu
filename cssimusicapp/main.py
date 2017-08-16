@@ -73,14 +73,11 @@ class MainHandler(webapp2.RequestHandler):
                 "post_label": '<li id="menu"><a href="%s">Post</a></li>' %('/createarticle'),
                 "profile_label": '<li id="menu"><a href="%s">Profile</a></li>' %('/profile'),
                 "users": page_users,
-<<<<<<< HEAD
                 "articles": articles,
-                "user": user
-=======
+                "user": user,
                 "video_div": '<div id="player"></div>',
                 "video_IDs": video_IDs,
                 "articles": articles
->>>>>>> 613f5d45054ecd51f01dc7720090dcc622a8a032
             }
         else:
             page_users = []
