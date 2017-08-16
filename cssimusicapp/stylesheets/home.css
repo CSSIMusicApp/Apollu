@@ -23,7 +23,7 @@ body{
    color: rgb(108,108,109);
    font-size: 17px;
    float: left;
-   overflow: scroll;
+   overflow: scroll, hidden;
 }
 
 .flex-item2 {
@@ -33,7 +33,7 @@ body{
    color: rgb(108,108,109);
    font-size: 17px;
    float: left;
-   overflow: scroll;
+   overflow: scroll, hidden;
 }
 
 .flex-item3 {
@@ -43,7 +43,7 @@ body{
    color: rgb(108,108,109);
    font-size: 17px;
    float: right;
-   overflow: scroll;
+   overflow: scroll, hidden;
 }
 
 
