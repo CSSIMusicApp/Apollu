@@ -5,14 +5,14 @@ html{
 
 body{
  margin:0;
- background: rgb(93, 115, 139);
+ background: rgb(193, 197, 210);
 }
 
 .flex-container1 {
    display: inline-block;
    height: 100%;
    width: 100%;
-   background: rgb(93, 115, 139);
+   background: rgb(193, 197, 210);
 
 }
 
@@ -20,7 +20,7 @@ body{
    height: 100%;
    width: 33.33%;
    background: transparent;
-   color: white;
+   color: rgb(108,108,109);
    font-size: 17px;
    float: left;
    overflow: scroll;
@@ -30,7 +30,7 @@ body{
  height: 100%;
    width: 33.33%;
    background: transparent;
-   color: white;
+   color: rgb(108,108,109);
    font-size: 17px;
    float: left;
    overflow: scroll;
@@ -40,7 +40,7 @@ body{
    height: 100%;
    width: 33.33%;
    background: transparent;
-   color: white;
+   color: rgb(108,108,109);
    font-size: 17px;
    float: right;
    overflow: scroll;

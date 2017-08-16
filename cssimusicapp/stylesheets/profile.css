@@ -4,15 +4,15 @@ html{
 }
 
 body{
-margin:0;
-background: rgb(93, 115, 139);
+ margin:0;
+ background: rgb(193, 197, 210);
 }
 
 .flex-container1 {
-  display: inline-block;
-  height: 100%;
-  width: 100%;
-  background: rgb(93, 115, 139);
+   display: inline-block;
+   height: 100%;
+   width: 100%;
+   background: rgb(193, 197, 210);
 
 }
 
