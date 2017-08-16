@@ -48,13 +48,11 @@
      </div>
      <div class="flex-item3">
        <div id="title"></div>
-       {%for user in users%}
        <ul>
          {%for interest in user.interests%}
-         <h1>{{interest}}</h1>
+         <h3>{{interest}}</h3>
          {%endfor%}
        </ul>
-       {%endfor%}
      </div>
    </div>
      <ul id="footer-ui">
