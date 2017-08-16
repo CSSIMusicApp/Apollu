@@ -17,9 +17,23 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
-- url: .*
+- url: /createarticle
+  script: main.app
+  login: required
+
+- url: /usercreate
+  script: main.app
+  login: required
+
+- url: /loggedout
   script: main.app
 
+- url: /profile
+  script: main.app
+  login: required
+
+- url: /.*
+  script: main.app
 
 libraries:
 - name: jinja2

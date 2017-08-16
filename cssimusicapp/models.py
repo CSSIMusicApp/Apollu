@@ -5,6 +5,7 @@ import datetime
 from google.appengine.ext import ndb
 from google.appengine.api import users
 from random import *
+import logging
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 user = users.get_current_user()
@@ -40,7 +41,7 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
 
     def post(self):
 
-        spotifyinput = self.request.get('spotify-data')
+        spotifyinput = self.request.get('spotify-playist-user')
         youtubeinput = self.request.get('youtube-data')
         textinput = self.request.get('text-data')
         spotifybase = "https://open.spotify.com/embed?uri="
@@ -59,6 +60,8 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
             template = env.get_template('spotifyarticle.html')
             articletype = "spotify"
             articledata = spotifyinput
+            playlist_user = self.request.get('spotify-playist-user')
+            playlist_id = self.request.get('spotify-playist-id')
 
         # i=0
         # while i<1:
@@ -148,7 +151,6 @@ class ArticleHandler(webapp2.RequestHandler):
         articlename = self.request.get('name')
         articlegrabbed = Article.query(Article.article_name == articlename)
         article = articlegrabbed.get()
-
         vars = {
         "name": article.article_name,
         "tags": article.tags,
@@ -157,8 +159,8 @@ class ArticleHandler(webapp2.RequestHandler):
 
         if article.articletype == "text":
             template = env.get_template('textarticle.html')
-        if article.articletype == "spotify":
+        elif article.articletype == "spotify":
             template = env.get_template('spotifyarticle.html')
-        if article.articletype == "youtube":
+        elif article.articletype == "youtube":
             template = env.get_template('youtubearticle.html')
         self.response.write(template.render(vars))
