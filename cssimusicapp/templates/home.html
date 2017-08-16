@@ -37,11 +37,11 @@
        {%for article in articles %}
          <ul>
            {% if article.articletype == 'youtube' %}
-           <h1>{{article.article_name}}</h1>
+            <h1><a href = "/article?name={{article.article_name}}">{{article.article_name}}</a></h1>
               <div id="player{{player_count}}"></div>
               {%set player_count = player_count + 1%}
            {% else %}
-           <h1>{{article.article_name}}</h1>
+           <h1><a href = "/article?name={{article.article_name}}">{{article.article_name}}</a></h1>
            <p>{{article.post}}</p>
            {%endif%}
          </ul>
@@ -54,7 +54,7 @@
      <div class="flex-item3">
        <div id="title"></div>
        <ul>
-         {%for interest in user.interests%}
+         {%for interest in currentuser.interests%}
          <h3>{{interest}}</h3>
          {%endfor%}
        </ul>
