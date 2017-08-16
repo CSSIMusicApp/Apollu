@@ -5,7 +5,9 @@ import datetime
 from google.appengine.ext import ndb
 from google.appengine.api import users
 from random import *
-import logging
+#import sys
+#import spotipy
+#from spotify.oauth2 import SpotifyClientCredentials
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 user = users.get_current_user()
@@ -37,13 +39,14 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
     def get(self):
         #template variable and html file will change
         template = env.get_template('createarticle.html')
-        self.response.write(template.render({"title": 'Name'}))
+
+        self.response.write(template.render())
 
     def post(self):
-
         spotifyinput = self.request.get('spotify-playist-user')
         youtubeinput = self.request.get('youtube-data')
         textinput = self.request.get('text-data')
+        tagsinput = self.request.get('tags')
         spotifybase = "https://open.spotify.com/embed?uri="
 
         if not spotifyinput and not youtubeinput:
@@ -80,7 +83,8 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
             post = articledata,
             date = datetime.datetime.now(),
             id = idtemp,
-            articletype = articletype
+            articletype = articletype,
+            tags = tagsinput.split(', ')
         )
 
         article.put()
@@ -105,7 +109,7 @@ class UserCreatorHandler(webapp2.RequestHandler):
     def post(self):
         user = User(
             username = self.request.get('username'),
-            interests = self.request.get('interests').split(','),
+            interests = self.request.get('interests').split(', '),
             email = self.request.get('email')
         )
 

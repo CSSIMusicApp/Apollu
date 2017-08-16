@@ -13,7 +13,7 @@ body{
    height: 100%;
    width: 100%;
    background: rgb(193, 197, 210);
-
+   text-decoration: none;
 }
 
 .flex-item1 {
@@ -60,4 +60,10 @@ body{
 
 #title {
  text-align: center;
+}
+
+#show-more {
+  position: relative;
+  width: 50%;
+  left: 26%;
 }

@@ -2,16 +2,23 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="/stylesheets/header.css">
-    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <link rel="stylesheet" href="/stylesheets/article.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" target="_blank"></script>
     <!-- <script src="/scripts/youtubeapi.js"></script> -->
     <title>{{name}}</title>
   </head>
   <body>
-    <h1>Article Name: {{ name }}</h1>
+    <div class="header">
+      <ul>
+        <li id="article-name"><a href="/">apollu</a></li>
+      </ul>
+    </div>
+    <h1>Article: {{ name }}</h1>
     <h2>Tags: {{ tags }}</h2>
     <div id="player"></div>
+    <div class="comments">
+      Comment:<br> <textarea id="comment-data" rows = "5" cols = "70" name="comment-data"></textarea>
+    </div>
     <script>
     var tag = document.createElement('script');
 
