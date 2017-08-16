@@ -32,11 +32,17 @@
      </div>
      <div class="flex-item2">
        <div id="title"></div>
+       {% set player_count = 0 %}
        {%for article in articles %}
          <ul>
            <div id="article_data">{{article.date}}</div>
            <h1>{{article.article_name}}</h1>
-           <h3>{{article.post}}</h3>
+           {% if article.articletype == 'youtube' %}
+              <div id="player{{player_count}}"></div>
+              {%set player_count = player_count + 1%}
+           {% else %}
+           <p>{{article.post}}</p>
+           {%endif%}
          </ul>
        {%endfor%}
      </div>
@@ -67,35 +73,22 @@
          //    after the API code downloads.
          var player;
          function onYouTubeIframeAPIReady() {
-           player = new YT.Player('player', {
-             height: '390',
-             width: '640',
-             videoId: '{{ video_id }}',
-             events: {
-               'onReady': onPlayerReady,
-               'onStateChange': onPlayerStateChange
-             }
+           {% set count = 0 %}
+           {% for article in articles %}
+           {% for id in video_IDs %}
+             {% if article.articletype == 'youtube' and article.post == id%}
+           player = new YT.Player('player{{count}}', {
+             height: '280',
+             width: '530',
+             videoId: '{{article.post}}'
            });
+           {%endif%}
+           {%set count = count + 1%}
+          {%endfor%}
+          {%endfor%}
          }
 
-         // 4. The API will call this function when the video player is ready.
-         function onPlayerReady(event) {
-           event.target.playVideo();
-         }
 
-         // 5. The API calls this function when the player's state changes.
-         //    The function indicates that when playing a video (state=1),
-         //    the player should play for six seconds and then stop.
-         var done = false;
-         function onPlayerStateChange(event) {
-           if (event.data == YT.PlayerState.PLAYING && !done) {
-             setTimeout(stopVideo, 6000);
-             done = true;
-           }
-         }
-         function stopVideo() {
-           player.stopVideo();
-         }
      </script>
  </body>
 </html>

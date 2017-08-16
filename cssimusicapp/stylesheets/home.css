@@ -23,6 +23,7 @@ body{
    color: white;
    font-size: 17px;
    float: left;
+   overflow: scroll;
 }
 
 .flex-item2 {
@@ -32,6 +33,7 @@ body{
    color: white;
    font-size: 17px;
    float: left;
+   overflow: scroll;
 }
 
 .flex-item3 {
@@ -41,6 +43,7 @@ body{
    color: white;
    font-size: 17px;
    float: right;
+   overflow: scroll;
 }
 
 
