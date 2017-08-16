@@ -5,7 +5,9 @@ import datetime
 from google.appengine.ext import ndb
 from google.appengine.api import users
 from random import *
-import logging
+#import sys
+#import spotipy
+#from spotify.oauth2 import SpotifyClientCredentials
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 user = users.get_current_user()
@@ -37,7 +39,8 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
     def get(self):
         #template variable and html file will change
         template = env.get_template('createarticle.html')
-        self.response.write(template.render({"title": 'Name'}))
+
+        self.response.write(template.render())
 
     def post(self):
 
