@@ -78,13 +78,15 @@ class MainHandler(webapp2.RequestHandler):
                 "user": user,
                 "video_div": '<div id="player"></div>',
                 "video_IDs": video_IDs,
-                "articles": articles
+                "articles": articles,
+                "currentuser": currentuser
             }
         else:
             page_users = []
             articles = []
             user_data = User.query().fetch()
             article_data = Article.query().order(-Article.date).fetch()
+            currentuser = User.query(User.email == user.email()).get()
 
             for user in user_data:
                 user = {
@@ -112,7 +114,8 @@ class MainHandler(webapp2.RequestHandler):
                 "video_IDs": video_IDs,
                 "users": page_users,
                 "user": user,
-                "articles": articles
+                "articles": articles,
+                "currentuser": currentuser
             }
 
         self.response.write(template.render(vars))
