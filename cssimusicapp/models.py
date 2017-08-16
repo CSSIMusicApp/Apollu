@@ -146,6 +146,21 @@ class ProfileHandler(webapp2.RequestHandler):
         template = env.get_template('profile.html')
         self.response.write(template.render(vars))
 
+    def post(self):
+        username = self.request.get('name')
+        # get follower and followee from database
+        followee = User.query(User.username == username).get()
+        follower = User.query(User.email == users.get_current_user().email()).get()
+
+        friend = Friends(
+            followee= followee.key,
+            follower= follower.key
+        )
+        friend.put()
+        self.response.write(follower.username)
+
+
+
 class ArticleHandler(webapp2.RequestHandler):
     def get(self):
         articlename = self.request.get('name')

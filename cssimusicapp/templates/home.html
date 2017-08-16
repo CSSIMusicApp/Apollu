@@ -23,9 +23,8 @@
    <div class="flex-container1">
      <div class="flex-item1">
        <div id="title"></div>
-       <ul>{%for user in users%}
-         <div class="">{{user.image}}</div>
-         <h1><a href = "/profile?name={{user.username}}">{{user.username}}</a></h1>
+       <ul>{%for followee in Friends%}
+         <h1><a href = "/profile?name={{followee.username}}">{{folowee.username}}</a></h1>
          {%endfor%}
        </ul>
        <br>

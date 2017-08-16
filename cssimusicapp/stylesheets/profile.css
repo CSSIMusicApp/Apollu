@@ -1,11 +1,21 @@
 html{
 -ms-text-size-adjust:100%;
--webkit-text-size-adjust:100%
+-webkit-text-size-adjust:100%;
 }
 
 body{
  margin:0;
  background: rgb(193, 197, 210);
+}
+
+#addfriend {
+  color: white;
+  border: none;
+  background: rgb(40, 55, 71);
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+  margin-left: 43%;
+  margin-top: 2%;
 }
 
 .flex-container1 {
