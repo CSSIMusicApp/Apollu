@@ -30,8 +30,14 @@ class MainHandler(webapp2.RequestHandler):
     #set on main handler too to change value of 'Log In/Log Out'
         user = users.get_current_user()
         template = env.get_template('home.html')
+        article_data = Article.query().order(-Article.date).fetch()
+        video_IDs = list()
 
     #if logged in(data with post option and "logout") else "LogIn" and keep everything
+
+        for article in article_data:
+            if article.articletype == 'youtube':
+                video_IDs.append(article.post)
 
         if user:
 
@@ -56,6 +62,7 @@ class MainHandler(webapp2.RequestHandler):
                     'article_name': article.article_name,
                     'tags': article.tags,
                     'post': article.post,
+                    'articletype': article.articletype,
                     'user': user
                 }
                 articles.append(article)
@@ -66,8 +73,14 @@ class MainHandler(webapp2.RequestHandler):
                 "post_label": '<li id="menu"><a href="%s">Post</a></li>' %('/createarticle'),
                 "profile_label": '<li id="menu"><a href="%s">Profile</a></li>' %('/profile'),
                 "users": page_users,
+<<<<<<< HEAD
                 "articles": articles,
                 "user": user
+=======
+                "video_div": '<div id="player"></div>',
+                "video_IDs": video_IDs,
+                "articles": articles
+>>>>>>> 613f5d45054ecd51f01dc7720090dcc622a8a032
             }
         else:
             page_users = []
@@ -87,6 +100,7 @@ class MainHandler(webapp2.RequestHandler):
                     'article_name': article.article_name,
                     'tags': article.tags,
                     'post': article.post,
+                    'articletype': article.articletype,
                     'user': user
                 }
                 articles.append(article)
@@ -96,6 +110,8 @@ class MainHandler(webapp2.RequestHandler):
                 "login": '<li id="right"><a href="%s">Log In</a></li>' %(users.create_login_url('/usercreate')),
                 "post_label": '<li></li>',
                 "profile_label": '<li></li>',
+                "player_count": 0,
+                "video_IDs": video_IDs,
                 "users": page_users,
                 "user": user,
                 "articles": articles

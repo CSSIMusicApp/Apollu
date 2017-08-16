@@ -8,6 +8,7 @@
 
 body {
   background: rgb(193, 197, 210);
+  margin: 0;
 }
 .header-content {
   font-family: 'Raleway', sans-serif;
