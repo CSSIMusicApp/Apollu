@@ -4,7 +4,8 @@ header {
     left: 0%;
     right: 0%;
     height: 65px;
- background: rgb(40, 55, 71);
+    width: 100%;
+    background: rgb(40, 55, 71);
     font-family: 'Raleway', sans-serif;
 }
 

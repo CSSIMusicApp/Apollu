@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/stylesheets/header.css">
+    <link rel="stylesheet" href="/stylesheets/profile.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" target="_blank"></script>
+    <title>{%for user in users%}
+    {{user.username}}
+    {%endfor%}
+    </title>
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <div id="friends">friends</div>
+        <div id="apollu"><a href="/">apollu</a></div>
+        <div id="interests">interests</div>
+      </div>
+
+    </header>
+    <div class="flex-container1">
+      <div class="flex-item1">
+        <div id="title"></div>
+        <ul>{%for user in users%}
+          <div class="">{{user.image}}</div>
+          <h1>{{user.username}}</h1>
+          {%endfor%}
+        </ul>
+        <br>
+      </div>
+      <div class="flex-item3">
+        <div id="title"></div>
+        {%for interest in interests%}
+        <ul>
+          <h1>{{interests}}</h1>
+        </ul>
+        {%endfor%}
+      </div>
+    </div>
+      <ul id="footer-ui">
+        {{ post_label }}
+        {{ profile_label }}
+        {{ login }}
+      </ul>
+  </body>
+</html>

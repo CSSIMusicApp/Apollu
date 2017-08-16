@@ -1,12 +1,13 @@
 #footer-ui {
    list-style-type: none;
-   margin-left: 80%;
+   margin-left: 75%;
    /*margin-top: 80%*/
    padding: 0px;
    overflow: hidden;
    background: rgb(40, 55, 71);
    text-align: center;
    position: fixed;
+   max-width: 500px;
    bottom: 0;
    right: 2%;
 }

@@ -10,28 +10,28 @@
     <link rel="stylesheet" href="/stylesheets/createarticle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" target="_blank"></script>
     <script src = "/scripts/createarticle.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet'>
   </head>
 
   <body>
     <div class="header">
       <ul>
-        <li id="left"><a href="/">{{title}}</a></li>
-        <li id="right"><a href="/signup">Sign Up</a></li>
-        <li id="right"><a href="/createarticle">Post</a></li>
+        <li id="center"><a href="/">apollu</a></li>
       </ul>
     </div>
 
 <form action = "/createarticle" method="post">
-    <br><br><br>
-      Article Name: <input type="text" name="article_name"><br><br>
-      Tags: <input type="text" name="tags"><br><br>
+    <br>
     <div class = "sectionone">
       <u>Section Type:</u><br>
       <input type="radio" name="sectiononetype" value = "post" id="written-post"> Written Post<br>
       <input type="radio" name="sectiononetype" value = "video"> Video<br>
       <input type="radio" name="sectiononetype" value = "playlist"> Spotify Playlist<br>
     </div>
+    <br></br>
+      Article Name: <input type="text" name="article_name"><br><br>
+      Tags: <input type="text" name="tags"><br><br>
 
     <div class = "writtenpost">
       <textarea id="text-data" rows = "15" cols = "50" name="text-data"></textarea></div>
@@ -39,7 +39,7 @@
         https://www.youtube.com/watch?v=<input id="youtube-data" type="text" name="url"></div>
     <div class = "spotifyurl">
         Playlist Link: <input id="spotify-data"type="text" name="spoturl"></div>
-    <input id="submit-button" type="submit" name="" value="create-article">
+    <input id="submit-button" type="submit" name="" value="post">
 </form>
   </body>
 </html>

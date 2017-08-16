@@ -1,5 +1,4 @@
 html {
-  background-image: url('/images/background.png');
   background-size: auto;
   background-repeat: no-repeat;
   width: 100%;
@@ -7,8 +6,40 @@ html {
   padding: 0;
 }
 
+.header {
+  height: 65px;
+  background: rgb(40, 55, 71);
+}
+
+ul {
+  list-style-type: none;
+  text-decoration: none;
+  color: red;
+  margin: 0;
+}
+
+a {
+  margin: 0;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  text-decoration: none;
+}
+
+#center {
+  padding-top: 16px;
+  font-size: 30px;
+}
+
+#left {
+  float: left;
+}
+
+#right {
+  float: right;
+}
+
 body {
-  background-color: transparent;
+  background: rgb(193, 197, 210);
   color:black;
   font-size:20px;
   text-align: center;
@@ -18,11 +49,17 @@ body {
 
 div{
   background-color: transparent;
+  font-family: 'Raleway', sans-serif;
+}
+
+form {
+  font-family: 'Raleway', sans-serif;
 }
 
 .sectionone{
-  position: absolute;
-  left: 50px;
+  position: relative;
+  top: 10px;
+  left: 40%;
   z-index: 3;
   width: 300px;
 }
