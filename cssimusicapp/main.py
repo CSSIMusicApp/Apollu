@@ -30,7 +30,7 @@ class MainHandler(webapp2.RequestHandler):
     #set on main handler too to change value of 'Log In/Log Out'
         user = users.get_current_user()
         template = env.get_template('home.html')
-        article_data = Article.query().order(-Article.date).fetch(limit=7)
+        article_data = Article.query().order(-Article.date).fetch(limit=5)
         video_IDs = list()
 
     #if logged in(data with post option and "logout") else "LogIn" and keep everything
@@ -47,7 +47,6 @@ class MainHandler(webapp2.RequestHandler):
             #common_data = User.query(User.common).fetch()
             #print('Common Data: %d') %(common_data)
 
-            article_data = Article.query().order(-Article.date).fetch()
             #print article_key
 
             for user in user_data:
@@ -83,7 +82,6 @@ class MainHandler(webapp2.RequestHandler):
             page_users = []
             articles = []
             user_data = User.query().fetch()
-            article_data = Article.query().order(-Article.date).fetch()
 
             for user in user_data:
                 user = {
@@ -115,6 +113,98 @@ class MainHandler(webapp2.RequestHandler):
             }
 
         self.response.write(template.render(vars))
+
+    def post(self):
+        user = users.get_current_user()
+        limit = int(self.request.get('limit') or '5')
+        article_data = Article.query().order(-Article.date).fetch(limit=limit)
+        template = env.get_template('home.html')
+
+        video_IDs = list()
+
+    #if logged in(data with post option and "logout") else "LogIn" and keep everything
+
+        for article in article_data:
+            if article.articletype == 'youtube':
+                video_IDs.append(article.post)
+
+        if user:
+
+            page_users = []
+            articles = []
+            user_data = User.query().fetch()
+            #common_data = User.query(User.common).fetch()
+            #print('Common Data: %d') %(common_data)
+
+            #print article_key
+
+            for user in user_data:
+                user = {
+                    'username': user.username,
+                    'interests': user.interests,
+                }
+                page_users.append(user)
+
+            for article in article_data:
+                article = {
+                    'article_name': article.article_name,
+                    'tags': article.tags,
+                    'post': article.post,
+                    'articletype': article.articletype,
+                    'user': user
+                }
+                articles.append(article)
+
+            vars = {
+                "title": "Name",
+                "login": '<li id="menu"><a href="%s">Log Out</a></li>' %(users.create_logout_url('/loggedout')),
+                "post_label": '<li id="menu"><a href="%s">Post</a></li>' %('/createarticle'),
+                "profile_label": '<li id="menu"><a href="%s">Profile</a></li>' %('/profile'),
+                "users": page_users,
+                "articles": articles,
+                "user": user,
+                "video_div": '<div id="player"></div>',
+                "next_limit": limit + 5,
+                "video_IDs": video_IDs,
+                "articles": articles
+            }
+        else:
+            page_users = []
+            articles = []
+            user_data = User.query().fetch()
+
+            for user in user_data:
+                user = {
+                    'username': user.username,
+                    'interests': user.interests
+                }
+                page_users.append(user)
+
+            for article in article_data:
+                article = {
+                    'article_name': article.article_name,
+                    'tags': article.tags,
+                    'post': article.post,
+                    'articletype': article.articletype,
+                    'user': user
+                }
+                articles.append(article)
+
+            vars = {
+                "title": "Name",
+                "login": '<li id="right"><a href="%s">Log In</a></li>' %(users.create_login_url('/usercreate')),
+                "post_label": '<li></li>',
+                "profile_label": '<li></li>',
+                "player_count": 0,
+                "video_IDs": video_IDs,
+                "users": page_users,
+                "next_limit": limit + 5,
+                "user": user,
+                "articles": articles
+            }
+
+        self.response.write(template.render(vars))
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),

@@ -9,6 +9,7 @@
    <!-- Latest compiled and minified CSS -->
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" target="_blank"></script>
+   <script src="/scripts/home.js"></script>
    <title>Apollu</title>
  </head>
  <body>
@@ -35,16 +36,20 @@
        {% set player_count = 0 %}
        {%for article in articles %}
          <ul>
-           <div id="article_data">{{article.date}}</div>
-           <h1>{{article.article_name}}</h1>
            {% if article.articletype == 'youtube' %}
+           <h1>{{article.article_name}}</h1>
               <div id="player{{player_count}}"></div>
               {%set player_count = player_count + 1%}
            {% else %}
+           <h1>{{article.article_name}}</h1>
            <p>{{article.post}}</p>
            {%endif%}
          </ul>
        {%endfor%}
+       <form class="show-more-form" action="/" method="post">
+         <input type="submit" name="show_more" id="show-more" value="Show More">
+         <input type="hidden" name="limit" value="{{next_limit}}">
+       </form>
      </div>
      <div class="flex-item3">
        <div id="title"></div>
