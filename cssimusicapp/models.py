@@ -40,10 +40,10 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
         self.response.write(template.render({"title": 'Name'}))
 
     def post(self):
-
         spotifyinput = self.request.get('spotify-playist-user')
         youtubeinput = self.request.get('youtube-data')
         textinput = self.request.get('text-data')
+        tagsinput = self.request.get('tags')
         spotifybase = "https://open.spotify.com/embed?uri="
 
         if not spotifyinput and not youtubeinput:
@@ -80,7 +80,8 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
             post = articledata,
             date = datetime.datetime.now(),
             id = idtemp,
-            articletype = articletype
+            articletype = articletype,
+            tags = tagsinput.split(', ')
         )
 
         article.put()
@@ -105,7 +106,7 @@ class UserCreatorHandler(webapp2.RequestHandler):
     def post(self):
         user = User(
             username = self.request.get('username'),
-            interests = self.request.get('interests').split(','),
+            interests = self.request.get('interests').split(', '),
             email = self.request.get('email')
         )
 

@@ -30,7 +30,7 @@ class MainHandler(webapp2.RequestHandler):
     #set on main handler too to change value of 'Log In/Log Out'
         user = users.get_current_user()
         template = env.get_template('home.html')
-        article_data = Article.query().order(-Article.date).fetch()
+        article_data = Article.query().order(-Article.date).fetch(limit=7)
         video_IDs = list()
 
     #if logged in(data with post option and "logout") else "LogIn" and keep everything
