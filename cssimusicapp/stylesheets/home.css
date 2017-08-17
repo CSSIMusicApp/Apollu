@@ -21,7 +21,7 @@ body{
    width: 33.33%;
    background: transparent;
    color: rgb(108,108,109);
-   font-size: 17px;
+   font-size: 13px;
    float: left;
    overflow: scroll, hidden;
 }
@@ -56,6 +56,11 @@ body{
  padding: 0;
  text-align: center;
 
+}
+
+a {
+  color: rgb(108,108,109);
+  text-decoration: none;
 }
 
 #title {

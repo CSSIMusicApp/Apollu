@@ -44,6 +44,7 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
         spotifyinput = self.request.get('spotify-playist-user')
         youtubeinput = self.request.get('youtube-data')
         textinput = self.request.get('text-data')
+        tagsinput = self.request.get('tags').lower() + ", all"
         spotifybase = "https://open.spotify.com/embed?uri="
 
         if not spotifyinput and not youtubeinput:
@@ -105,7 +106,7 @@ class UserCreatorHandler(webapp2.RequestHandler):
     def post(self):
         user = User(
             username = self.request.get('username'),
-            interests = self.request.get('interests').split(','),
+            interests = self.request.get('interests').lower().split(', '),
             email = self.request.get('email')
         )
 
@@ -131,14 +132,19 @@ class ProfileHandler(webapp2.RequestHandler):
         usersname = self.request.get('name')
         usergrabbed = User.query(User.username == usersname)
         user = usergrabbed.get()
+        currentuser = User.query(User.email == user.email).get()
 
-        friends = Friends.query(Friends.follower == user.key).fetch()
-        self.response.write(friends)
+        friends = Friends.query(Friends.follower == currentuser.key).fetch()
+        friends_data = []
+        for friend in friends:
+            # f = User.query(User.key == friend.key).get()
+            f = friend.followee.get()
+            friends_data.append(f)
 
         vars = {
         "name": user.username,
         "interests": user.interests,
-        "friends": friends,
+        "friends": friends_data,
         #Friends
         #articles
         #profile pictures
@@ -162,7 +168,7 @@ class ProfileHandler(webapp2.RequestHandler):
             follower= follower.key
         )
         friend.put()
-        self.response.write(follower.username)
+        self.response.write(followee.username)
 
 
 

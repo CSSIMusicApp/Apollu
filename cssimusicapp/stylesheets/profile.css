@@ -8,6 +8,11 @@ body{
  background: rgb(193, 197, 210);
 }
 
+a {
+  color: rgb(108,108,109);
+  text-decoration: none;
+}
+
 #addfriend {
   color: white;
   border: none;

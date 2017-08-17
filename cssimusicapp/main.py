@@ -28,10 +28,16 @@ env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        interestselected = self.request.get('interest')
+
+        if not interestselected:
+            self.redirect('/?interest=all')
     #set on main handler too to change value of 'Log In/Log Out'
         user = users.get_current_user()
+        currentuser = ''
+
         template = env.get_template('home.html')
-        article_data = Article.query().order(-Article.date).fetch(limit=5)
+        article_data = Article.query(Article.tags == interestselected).order(-Article.date).fetch(limit=5)
         video_IDs = list()
 
     #if logged in(data with post option and "logout") else "LogIn" and keep everything
@@ -41,18 +47,21 @@ class MainHandler(webapp2.RequestHandler):
                 video_IDs.append(article.post)
 
         if user:
-
             page_users = []
             articles = []
             user_data = User.query().fetch()
             currentuser = User.query(User.email == user.email()).get()
 
-            friends = Friends.query(Friends.follower == user.key).fetch()
-            self.response.write(friends)
+            friends = Friends.query(Friends.follower == currentuser.key).fetch()
+            # self.response.write(friends)
             #common_data = User.query(User.common).fetch()
             #print('Common Data: %d') %(common_data)
 
             #print article_key
+            friends_data = []
+            for friend in friends:
+                f = friend.followee.get()
+                friends_data.append(f)
 
             for user in user_data:
                 user = {
@@ -74,16 +83,17 @@ class MainHandler(webapp2.RequestHandler):
             vars = {
                 "title": "Name",
                 "login": '<li id="menu"><a href="%s">Log Out</a></li>' %(users.create_logout_url('/loggedout')),
-                "post_label": '<li id="menu"><a href="%s">Post</a></li>' %('/create'),
-                "profile_label": '<li id="menu"><a href="%s">Profile</a></li>' %('/profile?name=' + currentuser.username),
+                "post_label": '<li id="menu"><a href="%s">Post</a></li>' %('/createarticle'),
+                "profile_label": '<li id="menu"><a href="%s">Profile</a></li>' %("/profile?name=" + currentuser.username),
                 "users": page_users,
                 "articles": articles,
                 "user": user,
-                "friends": friends,
+                "friends": friends_data,
                 "video_div": '<div id="player"></div>',
                 "video_IDs": video_IDs,
                 "articles": articles,
-                "currentuser": currentuser
+                "currentuser": currentuser,
+                "currentinterest": interestselected
             }
         else:
             page_users = []
@@ -129,11 +139,20 @@ class MainHandler(webapp2.RequestHandler):
 
 
     def post(self):
+        interestselected = self.request.get('interest')
+        if not interestselected:
+            self.redirect('/?interest=all')
         user = users.get_current_user()
         limit = int(self.request.get('limit') or '5')
-        article_data = Article.query().order(-Article.date).fetch(limit=limit)
+        article_data = Article.query(Article.tags == interestselected).order(-Article.date).fetch(limit=limit)
         template = env.get_template('home.html')
-        currentuser = User.query(User.email == user.email()).get()
+        if user:
+            currentuser = User.query(User.email == user.email()).get()
+        else:
+            currentuser = {
+            "username": "Blank",
+            "interests": ["Log in to see your interests."]
+            }
         video_IDs = list()
 
     #if logged in(data with post option and "logout") else "LogIn" and keep everything

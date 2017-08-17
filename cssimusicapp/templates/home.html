@@ -24,9 +24,8 @@
    <div class="flex-container1">
      <div class="flex-item1">
        <div id="title"></div>
-       {{friends}}
        <ul>{%for friend in friends%}
-         <h1><a href = "/profile?name={{friend.followee}}">{{friend.followee}}</a></h1>
+         <h1><a href = "/profile?name={{friend.followee}}">{{friend.username}}</a></h1>
          {%endfor%}
        </ul>
        <br>
@@ -46,7 +45,7 @@
            {%endif%}
          </ul>
        {%endfor%}
-       <form class="show-more-form" action="/" method="post">
+       <form class="show-more-form" action="/?interest={{currentinterest}}" method="post">
          <input type="submit" name="show_more" id="show-more" value="Show More">
          <input type="hidden" name="limit" value="{{next_limit}}">
        </form>
@@ -55,7 +54,7 @@
        <div id="title"></div>
        <ul>
          {%for interest in currentuser.interests%}
-         <h3>{{interest}}</h3>
+         <h3><a href = "/?interest={{interest}}">{{interest}}</a></h3>
          {%endfor%}
        </ul>
      </div>
