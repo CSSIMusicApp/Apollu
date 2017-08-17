@@ -13,11 +13,21 @@
         <li id="article-name"><a href="/">apollu</a></li>
       </ul>
     </div>
-    <h1>Article: {{ name }}</h1>
+    <h3>{{ user_username }}</h3>
+    <h1>{{ name }}</h1>
     <h2>Tags: {{ tags }}</h2>
     <div id="player"></div>
     <div class="comments">
-      Comment:<br> <textarea id="comment-data" rows = "5" cols = "70" name="comment-data"></textarea>
+      <form id="comment-form" action="/article?name={{name}}" method="post">
+        <input type="hidden" name="article_name" value="{{name}}">
+        Comment:<br> <textarea id="comment-data" rows = "5" cols = "70" name="comment-data"></textarea>
+        <br>
+        <input id="comment-button" type="submit" name="comment-button" value="Comment">
+      </form>
+      {%for comment in comments%}
+      <p style="text-align: center;">{{comment.date}}</p>
+      <h3 style="text-align: center;">{{comment.comment_data}}</h3>
+      {%endfor%}
     </div>
     <script>
     var tag = document.createElement('script');

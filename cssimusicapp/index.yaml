@@ -15,3 +15,9 @@ indexes:
   - name: tags
   - name: date
     direction: desc
+
+- kind: Comment
+  properties:
+  - name: article
+  - name: date
+    direction: desc

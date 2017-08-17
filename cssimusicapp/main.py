@@ -143,7 +143,7 @@ class MainHandler(webapp2.RequestHandler):
         if not interestselected:
             self.redirect('/?interest=all')
         user = users.get_current_user()
-        limit = int(self.request.get('limit') or '5')
+        limit = int(self.request.get('limit') or '10')
         article_data = Article.query(Article.tags == interestselected).order(-Article.date).fetch(limit=limit)
         template = env.get_template('home.html')
         if user:
@@ -166,6 +166,7 @@ class MainHandler(webapp2.RequestHandler):
             page_users = []
             articles = []
             user_data = User.query().fetch()
+            currentuser = User.query(User.email == user.email()).get()
 
             #common_data = User.query(User.common).fetch()
             #print('Common Data: %d') %(common_data)
@@ -207,6 +208,11 @@ class MainHandler(webapp2.RequestHandler):
             page_users = []
             articles = []
             user_data = User.query().fetch()
+            currentuser = {
+            "username": "Blank",
+            "interests": ["Log in to see your interests."]
+            }
+
 
             for user in user_data:
                 user = {
@@ -239,6 +245,8 @@ class MainHandler(webapp2.RequestHandler):
                 "currentuser": currentuser
             }
 
+        #AJAX 'POST' stops request
+        #self.redirect('/')
         self.response.write(template.render(vars))
 
 

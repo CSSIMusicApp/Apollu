@@ -17,6 +17,7 @@ class Article(ndb.Model):
     date = ndb.DateTimeProperty(auto_now_add=True)
     comments = ndb.StringProperty(repeated=True)
     articletype = ndb.StringProperty()
+    user = ndb.StringProperty()
     id = ndb.IntegerProperty()
 
 class Friends(ndb.Model):
@@ -29,8 +30,13 @@ class User(ndb.Model):
     interests = ndb.StringProperty(repeated=True)
     email = ndb.StringProperty()
     common = ndb.IntegerProperty()
-    favorites = ndb.KeyProperty(repeated=True)
+    #favorites = ndb.KeyProperty(repeated=True)
     # image = ndb.StringProperty()
+
+class Comment(ndb.Model):
+    comment_data = ndb.StringProperty()
+    article = ndb.StringProperty()
+    date = ndb.DateTimeProperty()
 
 
 class ArticleCreatorHandler(webapp2.RequestHandler):
@@ -76,12 +82,16 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
             #change with database info
         idtemp = randint(0, 1000001)
 
+        current_user = User.query(User.email == user.email()).get()
+
         article = Article(
             article_name = self.request.get('article_name'),
             post = articledata,
             date = datetime.datetime.now(),
             id = idtemp,
-            articletype = articletype
+            articletype = articletype,
+            user = current_user.username,
+            tags = tagsinput.split(', ')
         )
 
         article.put()
@@ -177,12 +187,25 @@ class ArticleHandler(webapp2.RequestHandler):
         articlename = self.request.get('name')
         articlegrabbed = Article.query(Article.article_name == articlename)
         article = articlegrabbed.get()
-        vars = {
-        "name": article.article_name,
-        "tags": article.tags,
-        "post": article.post,
-        # "creator": article.user
-        }
+        comments = Comment.query(Comment.article == articlename).order(-Comment.date).fetch()
+
+        if comments == None:
+            vars = {
+            "user_username": article.user,
+            "name": article.article_name,
+            "tags": article.tags,
+            "post": article.post,
+            "comment": "",
+            "comment-date": ""
+            }
+        else:
+            vars = {
+            "user_username": article.user,
+            "name": article.article_name,
+            "tags": article.tags,
+            "post": article.post,
+            "comments": comments
+            }
 
         if article.articletype == "text":
             template = env.get_template('textarticle.html')
@@ -191,3 +214,17 @@ class ArticleHandler(webapp2.RequestHandler):
         elif article.articletype == "youtube":
             template = env.get_template('youtubearticle.html')
         self.response.write(template.render(vars))
+
+    def post(self):
+        comment = self.request.get('comment-data')
+        article_name = self.request.get('article_name')
+
+        comment_data = Comment(
+            comment_data = comment,
+            article = article_name,
+            date = datetime.datetime.now()
+        )
+
+        comment_data.put()
+
+        self.redirect('/article?name=%s' %(article_name))
