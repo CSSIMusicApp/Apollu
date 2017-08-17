@@ -70,7 +70,7 @@ class MainHandler(webapp2.RequestHandler):
             vars = {
                 "title": "Name",
                 "login": '<li id="menu"><a href="%s">Log Out</a></li>' %(users.create_logout_url('/loggedout')),
-                "post_label": '<li id="menu"><a href="%s">Post</a></li>' %('/create'),
+                "post_label": '<li id="menu"><a href="%s">Post</a></li>' %('/createarticle'),
                 "profile_label": '<li id="menu"><a href="%s">Profile</a></li>' %('/profile?name=' + currentuser.username),
                 "users": page_users,
                 "articles": articles,
@@ -124,10 +124,9 @@ class MainHandler(webapp2.RequestHandler):
 
     def post(self):
         user = users.get_current_user()
-        limit = int(self.request.get('limit') or '5')
+        limit = int(self.request.get('limit') or '10')
         article_data = Article.query().order(-Article.date).fetch(limit=limit)
         template = env.get_template('home.html')
-        currentuser = User.query(User.email == user.email()).get()
         video_IDs = list()
 
     #if logged in(data with post option and "logout") else "LogIn" and keep everything
@@ -141,6 +140,7 @@ class MainHandler(webapp2.RequestHandler):
             page_users = []
             articles = []
             user_data = User.query().fetch()
+            currentuser = User.query(User.email == user.email()).get()
 
             #common_data = User.query(User.common).fetch()
             #print('Common Data: %d') %(common_data)
@@ -182,6 +182,11 @@ class MainHandler(webapp2.RequestHandler):
             page_users = []
             articles = []
             user_data = User.query().fetch()
+            currentuser = {
+            "username": "Blank",
+            "interests": ["Log in to see your interests."]
+            }
+
 
             for user in user_data:
                 user = {
