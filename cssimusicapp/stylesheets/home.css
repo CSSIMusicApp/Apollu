@@ -21,13 +21,14 @@ body{
    width: 33.33%;
    background: transparent;
    color: rgb(108,108,109);
-   font-size: 17px;
+   font-size: 13px;
    float: left;
    overflow: scroll, hidden;
+   margin-left: 2%;
 }
 
 .flex-item2 {
- height: 100%;
+  height: 100%;
    width: 33.33%;
    background: transparent;
    color: rgb(108,108,109);
@@ -44,6 +45,7 @@ body{
    font-size: 17px;
    float: right;
    overflow: scroll, hidden;
+   margin-right: -4%;
 }
 
 
@@ -56,6 +58,11 @@ body{
  padding: 0;
  text-align: center;
 
+}
+
+a {
+  color: rgb(108,108,109);
+  text-decoration: none;
 }
 
 #title {

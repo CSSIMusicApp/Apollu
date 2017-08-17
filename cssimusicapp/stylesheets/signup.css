@@ -18,11 +18,12 @@ a {
   position: relative;
 }
 .container form {
+  position: relative;
   width: 550px;
   height: 550px;
   background: rgb(193, 197, 210);
   overflow: hidden;
-  margin-top: 10%;
+  margin-top: 25%;
 }
 
 #name {
@@ -83,8 +84,9 @@ a {
 
 #submit-button {
   font-family: 'Raleway', sans-serif;
-  height: 25px;
-  width: 50px;
+  font-size: 16px;
+  height: 30px;
+  width: 60px;
   margin-left: 45%;
   background: rgb(40, 55, 71);
   color: white;

@@ -22,6 +22,7 @@ import urllib2
 import datetime
 from models import User, Article, ArticleCreatorHandler, UserCreatorHandler, LogOutHandler, ProfileHandler, ArticleHandler
 from google.appengine.api import users
+from models import Friends
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
@@ -50,10 +51,17 @@ class MainHandler(webapp2.RequestHandler):
             articles = []
             user_data = User.query().fetch()
             currentuser = User.query(User.email == user.email()).get()
+
+            friends = Friends.query(Friends.follower == currentuser.key).fetch()
+            # self.response.write(friends)
             #common_data = User.query(User.common).fetch()
             #print('Common Data: %d') %(common_data)
 
             #print article_key
+            friends_data = []
+            for friend in friends:
+                f = friend.followee.get()
+                friends_data.append(f)
 
             for user in user_data:
                 user = {
@@ -80,6 +88,7 @@ class MainHandler(webapp2.RequestHandler):
                 "users": page_users,
                 "articles": articles,
                 "user": user,
+                "friends": friends_data,
                 "video_div": '<div id="player"></div>',
                 "video_IDs": video_IDs,
                 "articles": articles,
@@ -127,6 +136,7 @@ class MainHandler(webapp2.RequestHandler):
             }
 
         self.response.write(template.render(vars))
+
 
     def post(self):
         interestselected = self.request.get('interest')

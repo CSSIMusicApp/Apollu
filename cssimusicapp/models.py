@@ -5,9 +5,7 @@ import datetime
 from google.appengine.ext import ndb
 from google.appengine.api import users
 from random import *
-#import sys
-#import spotipy
-#from spotify.oauth2 import SpotifyClientCredentials
+import logging
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 user = users.get_current_user()
@@ -45,10 +43,10 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
     def get(self):
         #template variable and html file will change
         template = env.get_template('createarticle.html')
-
-        self.response.write(template.render())
+        self.response.write(template.render({"title": 'Name'}))
 
     def post(self):
+
         spotifyinput = self.request.get('spotify-playist-user')
         youtubeinput = self.request.get('youtube-data')
         textinput = self.request.get('text-data')
@@ -144,9 +142,19 @@ class ProfileHandler(webapp2.RequestHandler):
         usersname = self.request.get('name')
         usergrabbed = User.query(User.username == usersname)
         user = usergrabbed.get()
+        currentuser = User.query(User.email == user.email).get()
+
+        friends = Friends.query(Friends.follower == currentuser.key).fetch()
+        friends_data = []
+        for friend in friends:
+            # f = User.query(User.key == friend.key).get()
+            f = friend.followee.get()
+            friends_data.append(f)
+
         vars = {
         "name": user.username,
         "interests": user.interests,
+        "friends": friends_data,
         #Friends
         #articles
         #profile pictures
@@ -158,6 +166,21 @@ class ProfileHandler(webapp2.RequestHandler):
         }
         template = env.get_template('profile.html')
         self.response.write(template.render(vars))
+
+    def post(self):
+        username = self.request.get('name')
+        # get follower and followee from database
+        followee = User.query(User.username == username).get()
+        follower = User.query(User.email == users.get_current_user().email()).get()
+
+        friend = Friends(
+            followee= followee.key,
+            follower= follower.key
+        )
+        friend.put()
+        self.response.write(followee.username)
+
+
 
 class ArticleHandler(webapp2.RequestHandler):
     def get(self):

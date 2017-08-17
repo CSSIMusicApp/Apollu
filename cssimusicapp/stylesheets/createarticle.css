@@ -26,8 +26,10 @@ a {
 }
 
 #center {
+  color: white;
   padding-top: 16px;
   font-size: 30px;
+  text-decoration: none;
 }
 
 #left {
@@ -54,14 +56,21 @@ div{
 
 form {
   font-family: 'Raleway', sans-serif;
+  font-size: 18px;
 }
 
 .sectionone{
   position: relative;
   top: 10px;
-  left: 40%;
+  margin-left: 42%;
+  margin-right: 42%;
   z-index: 3;
   width: 300px;
+  font-size: 18px;
+}
+
+input {
+  font-size: 20px;
 }
 
 
