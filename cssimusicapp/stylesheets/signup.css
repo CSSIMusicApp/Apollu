@@ -1,3 +1,13 @@
+html{
+ -ms-text-size-adjust:100%;
+ -webkit-text-size-adjust:100%
+}
+
+body {
+ margin:0;
+ background: rgb(193, 197, 210);
+}
+
 ul {
   list-style-type: none;
   text-align: center;
@@ -23,7 +33,7 @@ a {
   height: 550px;
   background: rgb(193, 197, 210);
   overflow: hidden;
-  margin-top: 25%;
+  margin-top: 20%;
 }
 
 #name {

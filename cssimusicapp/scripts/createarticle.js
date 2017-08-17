@@ -1,26 +1,22 @@
 function setup()
 {
-  $('.writtenpost').hide()
+  $('#text-data').hide()
   $('.videourl').hide()
-  $('.spotifyurl').hide()
+  $('#input-fields').hide()
 
   $('input:radio[name="sectiononetype"]').on('click', function() {
     if (this.checked && this.value == 'post') {
-      $('.writtenpost').show()
+      $('#input-fields').show()
+      $('#input-fields').css("top", "60%")
+      $('#text-data').show()
       $('.videourl').hide()
-      $('.spotifyurl').hide()
   }
 
   if (this.checked && this.value == 'video') {
-    $('.writtenpost').hide()
+    $('#input-fields').show()
+    $('#input-fields').css("top", "40%")
+    $('#text-data').hide()
     $('.videourl').show()
-    $('.spotifyurl').hide()
-  }
-
-  if (this.checked && this.value == 'playlist') {
-    $('.writtenpost').hide()
-    $('.videourl').hide()
-    $('.spotifyurl').show()
   }
 })
 }

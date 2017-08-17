@@ -7,8 +7,14 @@ html {
 }
 
 .header {
-  height: 65px;
-  background: rgb(40, 55, 71);
+    position: relative;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    height: 65px;
+    width: 100%;
+    background: rgb(40, 55, 71);
+    font-family: 'Raleway', sans-serif;
 }
 
 ul {
@@ -16,6 +22,7 @@ ul {
   text-decoration: none;
   color: red;
   margin: 0;
+  padding: 0;
 }
 
 a {
@@ -25,20 +32,14 @@ a {
   text-decoration: none;
 }
 
-#center {
+#apollu-title {
   color: white;
-  padding-top: 16px;
+  padding-top: 14px;
   font-size: 30px;
   text-decoration: none;
 }
 
-#left {
-  float: left;
-}
 
-#right {
-  float: right;
-}
 
 body {
   background: rgb(193, 197, 210);
@@ -60,23 +61,22 @@ form {
 }
 
 .sectionone{
-  position: relative;
-  top: 10px;
-  margin-left: 42%;
-  margin-right: 42%;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 3;
   width: 300px;
   font-size: 18px;
 }
 
-input {
-  font-size: 20px;
+#input-fields {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-
-.writtenpost{
- position: relative;
- left: 120px;
- top: 0px;
-
+#input-fields textarea {
+  width: 100%;
 }

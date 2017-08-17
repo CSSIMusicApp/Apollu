@@ -46,29 +46,19 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
         self.response.write(template.render({"title": 'Name'}))
 
     def post(self):
-
-        spotifyinput = self.request.get('spotify-playist-user')
         youtubeinput = self.request.get('youtube-data')
         textinput = self.request.get('text-data')
         tagsinput = self.request.get('tags').lower() + ", all"
-        spotifybase = "https://open.spotify.com/embed?uri="
 
-        if not spotifyinput and not youtubeinput:
+        if not youtubeinput:
             template = env.get_template('textarticle.html')
             articletype = "text"
             articledata = textinput
 
-        if not spotifyinput and not textinput:
+        if not textinput:
             template = env.get_template('youtubearticle.html')
             articletype = "youtube"
             articledata = youtubeinput
-
-        if not textinput and not youtubeinput:
-            template = env.get_template('spotifyarticle.html')
-            articletype = "spotify"
-            articledata = spotifyinput
-            playlist_user = self.request.get('spotify-playist-user')
-            playlist_id = self.request.get('spotify-playist-id')
 
         # i=0
         # while i<1:
@@ -209,8 +199,6 @@ class ArticleHandler(webapp2.RequestHandler):
 
         if article.articletype == "text":
             template = env.get_template('textarticle.html')
-        elif article.articletype == "spotify":
-            template = env.get_template('spotifyarticle.html')
         elif article.articletype == "youtube":
             template = env.get_template('youtubearticle.html')
         self.response.write(template.render(vars))

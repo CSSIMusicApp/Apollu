@@ -1,19 +1,46 @@
-/*html {
-  -ms-text-size-adjust:100%;
-  -webkit-text-size-adjust:100%;
-  background: rgb(193, 197, 210);
+html {
+  background-size: auto;
+  background-repeat: no-repeat;
+  width: 100%;
   margin: 0;
   padding: 0;
-}*/
+}
+
+.header {
+    position: relative;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    height: 65px;
+    width: 100%;
+    background: rgb(40, 55, 71);
+    font-family: 'Raleway', sans-serif;
+}
+
+ul {
+  list-style-type: none;
+  text-decoration: none;
+  color: red;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  margin: 0;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  text-decoration: none;
+}
+
+#apollu-title {
+  color: white;
+  font-size: 30px;
+  text-decoration: none;
+}
 
 body {
   background: rgb(193, 197, 210);
   margin: 0;
-}
-.header-content {
-  font-family: 'Raleway', sans-serif;
-  margin: 0;
-  padding: 0;
 }
 
 div {
