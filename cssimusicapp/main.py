@@ -27,10 +27,16 @@ env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        interestselected = self.request.get('interest')
+
+        if not interestselected:
+            self.redirect('/?interest=all')
     #set on main handler too to change value of 'Log In/Log Out'
         user = users.get_current_user()
+        currentuser = ''
+
         template = env.get_template('home.html')
-        article_data = Article.query().order(-Article.date).fetch(limit=5)
+        article_data = Article.query(Article.tags == interestselected).order(-Article.date).fetch(limit=5)
         video_IDs = list()
 
     #if logged in(data with post option and "logout") else "LogIn" and keep everything
@@ -40,7 +46,6 @@ class MainHandler(webapp2.RequestHandler):
                 video_IDs.append(article.post)
 
         if user:
-
             page_users = []
             articles = []
             user_data = User.query().fetch()
@@ -71,14 +76,15 @@ class MainHandler(webapp2.RequestHandler):
                 "title": "Name",
                 "login": '<li id="menu"><a href="%s">Log Out</a></li>' %(users.create_logout_url('/loggedout')),
                 "post_label": '<li id="menu"><a href="%s">Post</a></li>' %('/createarticle'),
-                "profile_label": '<li id="menu"><a href="%s">Profile</a></li>' %('/profile?name=' + currentuser.username),
+                "profile_label": '<li id="menu"><a href="%s">Profile</a></li>' %("/profile?name=" + currentuser.username),
                 "users": page_users,
                 "articles": articles,
                 "user": user,
                 "video_div": '<div id="player"></div>',
                 "video_IDs": video_IDs,
                 "articles": articles,
-                "currentuser": currentuser
+                "currentuser": currentuser,
+                "currentinterest": interestselected
             }
         else:
             page_users = []
@@ -123,10 +129,20 @@ class MainHandler(webapp2.RequestHandler):
         self.response.write(template.render(vars))
 
     def post(self):
+        interestselected = self.request.get('interest')
+        if not interestselected:
+            self.redirect('/?interest=all')
         user = users.get_current_user()
         limit = int(self.request.get('limit') or '10')
-        article_data = Article.query().order(-Article.date).fetch(limit=limit)
+        article_data = Article.query(Article.tags == interestselected).order(-Article.date).fetch(limit=limit)
         template = env.get_template('home.html')
+        if user:
+            currentuser = User.query(User.email == user.email()).get()
+        else:
+            currentuser = {
+            "username": "Blank",
+            "interests": ["Log in to see your interests."]
+            }
         video_IDs = list()
 
     #if logged in(data with post option and "logout") else "LogIn" and keep everything
@@ -219,6 +235,8 @@ class MainHandler(webapp2.RequestHandler):
                 "currentuser": currentuser
             }
 
+        #AJAX 'POST' stops request
+        #self.redirect('/')
         self.response.write(template.render(vars))
 
 

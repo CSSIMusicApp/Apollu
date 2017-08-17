@@ -5,7 +5,7 @@ var setup = () => {
     $.ajax({
       url: '/',
       method: 'POST',
-      data: { },
+      data: { prop },
     }).done(function(response){
       console.log('done')
     }).fail(function() {

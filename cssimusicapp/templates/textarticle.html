@@ -2,25 +2,30 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="/stylesheets/header.css">
     <link rel="stylesheet" href="/stylesheets/article.css">
     <title>{{article_name}}</title>
   </head>
   <body>
     <div class="header">
       <ul>
-        <li id="left"><a href="/">Name</a></li>
-        <li id="right"><a href="/signup">Sign Up</a></li>
-        <li id="right"><a href="/createarticle">Post</a></li>
+        <li id="article-name"><a href="/">apollu</a></li>
       </ul>
     </div>
-    <div class="container">
-      <div class="articles">
-        <h1 id="article-name">Article Name: {{ name }}</h1>
-        <h2 id="article-tags">Tags: {{ tags }}</h2>
-        <p id="article-post">Post: {{ post }}</p>
-      </div>
+    <h3>{{ user_username }}</h3>
+    <h1>{{ name }}</h1>
+    <h2>Tags: {{ tags }}</h2>
+    <h3>{{post}}</h3>
+    <div class="comments">
+      <form id="comment-form" action="/article?name={{name}}" method="post">
+        <input type="hidden" name="article_name" value="{{name}}">
+        Comment:<br> <textarea id="comment-data" rows = "5" cols = "70" name="comment-data"></textarea>
+        <br>
+        <input id="comment-button" type="submit" name="comment-button" value="Comment">
+      </form>
+      {%for comment in comments%}
+      <p style="text-align: center;">{{comment.date}}</p>
+      <h3 style="text-align: center;">{{comment.comment_data}}</h3>
+      {%endfor%}
     </div>
-    <div class="footer"></div>
   </body>
 </html>
