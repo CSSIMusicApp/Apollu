@@ -46,7 +46,7 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
         spotifyinput = self.request.get('spotify-playist-user')
         youtubeinput = self.request.get('youtube-data')
         textinput = self.request.get('text-data')
-        tagsinput = self.request.get('tags')
+        tagsinput = self.request.get('tags').lower() + ", all"
         spotifybase = "https://open.spotify.com/embed?uri="
 
         if not spotifyinput and not youtubeinput:
@@ -109,7 +109,7 @@ class UserCreatorHandler(webapp2.RequestHandler):
     def post(self):
         user = User(
             username = self.request.get('username'),
-            interests = self.request.get('interests').split(', '),
+            interests = self.request.get('interests').lower().split(', '),
             email = self.request.get('email')
         )
 
