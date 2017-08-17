@@ -131,9 +131,14 @@ class ProfileHandler(webapp2.RequestHandler):
         usersname = self.request.get('name')
         usergrabbed = User.query(User.username == usersname)
         user = usergrabbed.get()
+
+        friends = Friends.query(Friends.follower == user.key).fetch()
+        self.response.write(friends)
+
         vars = {
         "name": user.username,
         "interests": user.interests,
+        "friends": friends,
         #Friends
         #articles
         #profile pictures
@@ -170,7 +175,7 @@ class ArticleHandler(webapp2.RequestHandler):
         "name": article.article_name,
         "tags": article.tags,
         "post": article.post,
-        "creator": article.user
+        # "creator": article.user
         }
 
         if article.articletype == "text":
