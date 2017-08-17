@@ -85,7 +85,10 @@ class MainHandler(webapp2.RequestHandler):
             articles = []
             user_data = User.query().fetch()
             article_data = Article.query().order(-Article.date).fetch(limit=5)
-            currentuser = User.query(User.email == user.email()).get()
+            currentuser = {
+            "username": "Blank",
+            "interests": ["Log in to see your interests."]
+            }
 
             for user in user_data:
                 user = {
