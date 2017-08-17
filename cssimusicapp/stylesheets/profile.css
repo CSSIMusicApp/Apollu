@@ -19,8 +19,13 @@ a {
   background: rgb(40, 55, 71);
   font-family: 'Raleway', sans-serif;
   font-size: 15px;
-  margin-left: 47%;
+  margin-left: 42%;
   margin-top: 2%;
+}
+
+#apollu {
+  text-align: center;
+  left: 40%;
 }
 
 .flex-container1 {
