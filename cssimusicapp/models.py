@@ -130,7 +130,6 @@ class LogOutHandler(webapp2.RequestHandler):
         vars = {
             "title": "Name",
             #change
-            "username": "username",
             "login": '<li id="right"><a href="%s">Log In</a></li>' %(users.create_login_url('/usercreate')),
             "post_label": '<li></li>'
         }
