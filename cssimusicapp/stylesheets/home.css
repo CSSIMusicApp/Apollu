@@ -48,7 +48,13 @@ body{
    font-size: 17px;
    float: right;
    overflow: scroll, hidden;
-   text-align: center;
+   margin-right: -4.7%;
+}
+
+
+.flex-item2 ul {
+ padding: 0;
+ text-align: center;
 }
 
 
@@ -56,6 +62,10 @@ a {
   color: rgb(108,108,109);
   text-decoration: none;
 }
+
+/*header {
+  background-image: url("https://cdn3.iconfinder.com/data/icons/sound-wave/512/b122_12-512.png")
+}*/
 
 #title {
  text-align: center;

@@ -9,16 +9,13 @@
     <!-- Latest compiled and minified CSS -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" target="_blank"></script>
-    <title>{%for user in users%}
-    {{user.username}}
-    {%endfor%}
-    </title>
+    <title>{{name}}</title>
   </head>
   <body>
     <header>
       <div class="header-content">
         <div id="friends">friends</div>
-        <div id="apollu"><a href="/">apollu</a></div>
+        <div id="apollu"><a href="/">{{name}}</a></div>
         <div id="interests">interests</div>
       </div>
 
