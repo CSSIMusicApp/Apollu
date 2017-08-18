@@ -28,7 +28,7 @@ header .header-content {
 
 header #friends {
     position: absolute;
-    left: 14.8%;
+    left: 14.2%;
     margin: 0px;
     padding: 0px;
     padding-top: 25px;
@@ -37,7 +37,7 @@ header #friends {
 
 header #apollu {
     position: absolute;
-    left: 47.3%;
+    left: 46%;
     font-size: 30px;
     margin: 0px 0px;
     padding: 0px;
