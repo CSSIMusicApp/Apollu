@@ -46,29 +46,19 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
         self.response.write(template.render({"title": 'Name'}))
 
     def post(self):
-
-        spotifyinput = self.request.get('spotify-playist-user')
         youtubeinput = self.request.get('youtube-data')
         textinput = self.request.get('text-data')
         tagsinput = self.request.get('tags').lower() + ", all"
-        spotifybase = "https://open.spotify.com/embed?uri="
 
-        if not spotifyinput and not youtubeinput:
+        if not youtubeinput:
             template = env.get_template('textarticle.html')
             articletype = "text"
             articledata = textinput
 
-        if not spotifyinput and not textinput:
+        if not textinput:
             template = env.get_template('youtubearticle.html')
             articletype = "youtube"
             articledata = youtubeinput
-
-        if not textinput and not youtubeinput:
-            template = env.get_template('spotifyarticle.html')
-            articletype = "spotify"
-            articledata = spotifyinput
-            playlist_user = self.request.get('spotify-playist-user')
-            playlist_id = self.request.get('spotify-playist-id')
 
         # i=0
         # while i<1:
@@ -82,6 +72,12 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
             #change with database info
         idtemp = randint(0, 1000001)
 
+        user_data = User.query().fetch()
+
+        for current_user in user_data:
+            if current_user.email == user.email:
+                User.email = user.email
+                
         current_user = User.query(User.email == user.email()).get()
 
         article = Article(
@@ -122,7 +118,7 @@ class UserCreatorHandler(webapp2.RequestHandler):
 
         user.put()
 
-        self.redirect('/')
+        self.redirect('/loading')
 
 class LogOutHandler(webapp2.RequestHandler):
     def get(self):
@@ -160,9 +156,8 @@ class ProfileHandler(webapp2.RequestHandler):
         #profile pictures
 
         "title": "Name",
-        "login": '<li id="right"><a href="%s">Log In</a></li>' %(users.create_login_url('/usercreate')),
-        "post_label": '<li></li>',
-        "profile_label": '<li></li>',
+        "login": '<li id="menu"><a href="%s">Log Out</a></li>' %(users.create_logout_url('/loggedout')),
+        "post_label": '<li id="menu"><a href="%s">Post</a></li>' %('/createarticle')
         }
         template = env.get_template('profile.html')
         self.response.write(template.render(vars))
@@ -209,8 +204,6 @@ class ArticleHandler(webapp2.RequestHandler):
 
         if article.articletype == "text":
             template = env.get_template('textarticle.html')
-        elif article.articletype == "spotify":
-            template = env.get_template('spotifyarticle.html')
         elif article.articletype == "youtube":
             template = env.get_template('youtubearticle.html')
         self.response.write(template.render(vars))
@@ -228,3 +221,9 @@ class ArticleHandler(webapp2.RequestHandler):
         comment_data.put()
 
         self.redirect('/article?name=%s' %(article_name))
+
+class LoadingHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('loading.html')
+
+        self.response.write(template.render())

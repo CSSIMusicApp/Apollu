@@ -6,7 +6,6 @@
     <!-- Latest compiled and minified CSS -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="/stylesheets/header.css">
     <link rel="stylesheet" href="/stylesheets/createarticle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" target="_blank"></script>
     <script src = "/scripts/createarticle.js"></script>
@@ -17,30 +16,25 @@
   <body>
     <div class="header">
       <ul>
-        <li id="center"><a href="/">apollu</a></li>
+        <li id="apollu-title"><a href="/">apollu</a></li>
       </ul>
     </div>
-
 <form action = "/createarticle" method="post">
     <br>
     <div class = "sectionone">
       <u>Section Type:</u><br>
-      <input type="radio" name="sectiononetype" value = "post" id="written-post"> Written Post<br>
+      <input type="radio" name="sectiononetype" value = "post"> Written Post<br>
       <input type="radio" name="sectiononetype" value = "video"> Video<br>
-      <input type="radio" name="sectiononetype" value = "playlist"> Spotify Playlist<br>
     </div>
     <br></br>
-      Article Name: <input type="text" name="article_name"><br><br>
-      Tags: <input type="text" name="tags"><br><br>
+    <div id="input-fields">
+         Name: <input id="input-name" type="text" name="article_name"><br><br>
+         Tags: <input id="input-text" name="tags"><br><br>
 
-
-         <div class = "writtenpost">
-           <textarea id="text-data" rows = "15" cols = "50" name="text-data"></textarea></div>
-         <div class = "videourl">
-             https://www.youtube.com/watch?v=<input id="youtube-data" type="text" name="youtube-data"></div>
-         <div class = "spotifyurl">
-             https://open.spotify.com/user/<input id="spotify-data"type="text" name="spotify-playist-user">/playlist/<input id="spotify-data"type="text" name="spotify-playist-id"></div>
-         <input id="submit-button" type="submit" name="" value="post">
+        <textarea id="text-data" rows = "15" cols = "50" name="text-data"></textarea>
+        <p class="videourl">https://www.youtube.com/watch?v=<input class="videourl" type="text" name="youtube-data"></p>
+      <input id="submit-button" type="submit" name="" value="post">
+    </div>
 </form>
  </body>
 </html>
