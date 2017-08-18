@@ -72,6 +72,12 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
             #change with database info
         idtemp = randint(0, 1000001)
 
+        user_data = User.query().fetch()
+
+        for current_user in user_data:
+            if current_user.email == user.email:
+                User.email = user.email
+                
         current_user = User.query(User.email == user.email()).get()
 
         article = Article(
@@ -112,7 +118,7 @@ class UserCreatorHandler(webapp2.RequestHandler):
 
         user.put()
 
-        self.redirect('/')
+        self.redirect('/loading')
 
 class LogOutHandler(webapp2.RequestHandler):
     def get(self):
@@ -150,9 +156,8 @@ class ProfileHandler(webapp2.RequestHandler):
         #profile pictures
 
         "title": "Name",
-        "login": '<li id="right"><a href="%s">Log In</a></li>' %(users.create_login_url('/usercreate')),
-        "post_label": '<li></li>',
-        "profile_label": '<li></li>',
+        "login": '<li id="menu"><a href="%s">Log Out</a></li>' %(users.create_logout_url('/loggedout')),
+        "post_label": '<li id="menu"><a href="%s">Post</a></li>' %('/createarticle')
         }
         template = env.get_template('profile.html')
         self.response.write(template.render(vars))
@@ -216,3 +221,9 @@ class ArticleHandler(webapp2.RequestHandler):
         comment_data.put()
 
         self.redirect('/article?name=%s' %(article_name))
+
+class LoadingHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('loading.html')
+
+        self.response.write(template.render())

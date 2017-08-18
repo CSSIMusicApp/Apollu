@@ -1,4 +1,4 @@
-application: apollu-176900
+application: apolluinc-176900
 version: 1
 runtime: python27
 api_version: 1
@@ -28,7 +28,7 @@ handlers:
 - url: /loggedout
   script: main.app
 
-- url: /profile
+- url: /profile.*
   script: main.app
   login: required
 

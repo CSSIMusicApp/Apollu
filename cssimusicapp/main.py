@@ -20,7 +20,7 @@ import webapp2
 import jinja2
 import urllib2
 import datetime
-from models import User, Article, ArticleCreatorHandler, UserCreatorHandler, LogOutHandler, ProfileHandler, ArticleHandler
+from models import User, Article, ArticleCreatorHandler, UserCreatorHandler, LogOutHandler, ProfileHandler, ArticleHandler, LoadingHandler
 from google.appengine.api import users
 from models import Friends
 
@@ -28,13 +28,11 @@ env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        interestselected = self.request.get('interest')
+        interestselected = self.request.get('interest') or 'all'
 
-        if not interestselected:
-            self.redirect('/?interest=all')
+        # if not interestselected:
+        #     self.redirect('/?interest=all')
     #set on main handler too to change value of 'Log In/Log Out'
-        user = users.get_current_user()
-        currentuser = ''
 
         template = env.get_template('home.html')
         article_data = Article.query(Article.tags == interestselected).order(-Article.date).fetch(limit=5)
@@ -46,13 +44,22 @@ class MainHandler(webapp2.RequestHandler):
             if article.articletype == 'youtube':
                 video_IDs.append(article.post)
 
+        user = users.get_current_user()
         if user:
             page_users = []
             articles = []
             user_data = User.query().fetch()
-            currentuser = User.query(User.email == user.email()).get()
 
-            friends = Friends.query(Friends.follower == currentuser.key).fetch()
+            # user is Google Users API user; currentuser is form our datastore
+            currentuser = User.query(User.email == user.email()).get()
+            if not currentuser:
+                currentUserName = ''
+                friends = []
+            else:
+                friends = Friends.query(Friends.follower == currentuser.key).fetch()
+                currentUserName = currentuser.username
+
+
             # self.response.write(friends)
             #common_data = User.query(User.common).fetch()
             #print('Common Data: %d') %(common_data)
@@ -84,7 +91,7 @@ class MainHandler(webapp2.RequestHandler):
                 "title": "Name",
                 "login": '<li id="menu"><a href="%s">Log Out</a></li>' %(users.create_logout_url('/loggedout')),
                 "post_label": '<li id="menu"><a href="%s">Post</a></li>' %('/createarticle'),
-                "profile_label": '<li id="menu"><a href="%s">Profile</a></li>' %("/profile?name=" + currentuser.username),
+                "profile_label": '<li id="menu"><a href="%s">Profile</a></li>' %("/profile?name=" + currentUserName),
                 "users": page_users,
                 "articles": articles,
                 "user": user,
@@ -92,17 +99,18 @@ class MainHandler(webapp2.RequestHandler):
                 "video_div": '<div id="player"></div>',
                 "video_IDs": video_IDs,
                 "articles": articles,
-                "currentuser": currentuser,
+                "currentuser": currentuser, # MIGHT BE None
                 "currentinterest": interestselected
             }
         else:
+            # Not logged in
             page_users = []
             articles = []
             user_data = User.query().fetch()
             article_data = Article.query().order(-Article.date).fetch(limit=5)
             currentuser = {
-            "username": "Blank",
-            "interests": ["Log in to see your interests."]
+                "username": "Blank",
+                "interests": ["Log in to see your interests."]
             }
 
             for user in user_data:
@@ -256,5 +264,6 @@ app = webapp2.WSGIApplication([
     ('/usercreate', UserCreatorHandler),
     ('/loggedout', LogOutHandler),
     ('/profile', ProfileHandler),
-    ('/article', ArticleHandler)
+    ('/article', ArticleHandler),
+    ('/loading', LoadingHandler)
 ], debug=True)
