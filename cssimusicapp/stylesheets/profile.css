@@ -1,6 +1,6 @@
 html{
--ms-text-size-adjust:100%;
--webkit-text-size-adjust:100%;
+ -ms-text-size-adjust:100%;
+ -webkit-text-size-adjust:100%
 }
 
 body{
@@ -8,74 +8,72 @@ body{
  background: rgb(193, 197, 210);
 }
 
+.flex-container1 {
+   display: inline-block;
+   margin: 0;
+   padding: 0;
+   height: 100%;
+   width: 100%;
+   background: rgb(193, 197, 210);
+   text-decoration: none;
+}
+
+.flex-item1 {
+   height: 100%;
+   width: 33.33%;
+   background: transparent;
+   color: rgb(108,108,109);
+   font-size: 13px;
+   float: left;
+   overflow: scroll, hidden;
+   text-align: center;
+}
+
+.flex-item2 {
+   height: 100%;
+   width: 33.33%;
+   background: transparent;
+   color: rgb(108,108,109);
+   font-size: 17px;
+   float: left;
+   overflow: scroll, hidden;
+   text-align: center;
+}
+
+.flex-item3 {
+   height: 100%;
+   width: 33.33%;
+   background: transparent;
+   color: rgb(108,108,109);
+   font-size: 17px;
+   float: right;
+   overflow: scroll, hidden;
+   margin-right: -4.7%;
+}
+
+
+.flex-item2 ul {
+ padding: 0;
+ text-align: center;
+}
+
+
 a {
   color: rgb(108,108,109);
   text-decoration: none;
 }
 
-#addfriend {
-  color: white;
-  border: none;
-  background: rgb(40, 55, 71);
-  font-family: 'Raleway', sans-serif;
-  font-size: 15px;
-  margin-left: 42%;
-  margin-top: 2%;
-}
-
-#apollu {
-  text-align: center;
-  left: 40%;
-}
-
-.flex-container1 {
-   display: inline-block;
-   height: 100%;
-   width: 100%;
-   background: rgb(193, 197, 210);
-
-}
-
-.flex-item1 {
-  height: 100%;
-  width: 33.33%;
-  background: transparent;
-  color: white;
-  font-size: 17px;
-  float: left;
-}
-
-.flex-item2 {
-height: 100%;
-  width: 33.33%;
-  background: transparent;
-  color: white;
-  font-size: 17px;
-  float: left;
-}
-
-.flex-item3 {
-  height: 100%;
-  width: 33.33%;
-  background: transparent;
-  color: white;
-  font-size: 17px;
-  float: right;
-  margin-right: -4.7%;
-}
-
-
-.flex-item2 ul {
-padding: 0;
-text-align: center;
-}
-
-.flex-item3 ul {
-padding: 0;
-text-align: center;
-
-}
+/*header {
+  background-image: url("https://cdn3.iconfinder.com/data/icons/sound-wave/512/b122_12-512.png")
+}*/
 
 #title {
-text-align: center;
+ text-align: center;
+}
+
+form input {
+  width: 50%;
+  background: rgb(108,108,109);
+  border: none;
+  color: white;
 }
