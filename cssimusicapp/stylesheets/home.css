@@ -8,7 +8,7 @@ body {
  margin:0;
  padding: 0;
  background: rgb(193, 197, 210);
- overflow: hidden;
+ overflow: scroll, hidden;
 }
 
 .flex-container1 {

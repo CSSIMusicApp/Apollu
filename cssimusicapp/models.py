@@ -142,10 +142,26 @@ class ProfileHandler(webapp2.RequestHandler):
         article_data = Article.query(Article.user == username).order(-Article.date).fetch()
         friends = Friends.query(Friends.follower == currentuser.key).fetch()
         friends_data = []
+        video_IDs = list()
         for friend in friends:
             # f = User.query(User.key == friend.key).get()
             f = friend.followee.get()
             friends_data.append(f)
+
+        for article in article_data:
+            if article.articletype == 'youtube':
+                video_IDs.append(article.post)
+
+        for article in article_data:
+            article = {
+                'article_name': article.article_name,
+                'tags': article.tags,
+                'post': article.post,
+                'articletype': article.articletype,
+                'user': user
+            }
+            articles.append(article)
+
 
 
         vars = {
@@ -155,7 +171,8 @@ class ProfileHandler(webapp2.RequestHandler):
         #Friends
         #articles
         #profile pictures
-        "articles": article_data,
+        "articles": articles,
+        "video_IDs": video_IDs,
         "title": "Name",
         "login": '<li id="menu"><a href="%s">Log Out</a></li>' %(users.create_logout_url('/loggedout')),
         "post_label": '<li id="menu"><a href="%s">Post</a></li>' %('/createarticle')

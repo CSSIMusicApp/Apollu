@@ -1,11 +1,14 @@
 html{
  -ms-text-size-adjust:100%;
- -webkit-text-size-adjust:100%
+ -webkit-text-size-adjust:100%;
+
 }
 
-body{
+body {
  margin:0;
+ padding: 0;
  background: rgb(193, 197, 210);
+ overflow: scroll, hidden;
 }
 
 .flex-container1 {
@@ -27,6 +30,7 @@ body{
    float: left;
    overflow: scroll, hidden;
    text-align: center;
+   margin-left: -2%;
 }
 
 .flex-item2 {
@@ -38,6 +42,7 @@ body{
    float: left;
    overflow: scroll, hidden;
    text-align: center;
+   margin-left: 1.4%;
 }
 
 .flex-item3 {
@@ -48,7 +53,7 @@ body{
    font-size: 17px;
    float: right;
    overflow: scroll, hidden;
-   margin-right: -4.7%;
+   text-align: center;
 }
 
 
@@ -62,10 +67,6 @@ a {
   color: rgb(108,108,109);
   text-decoration: none;
 }
-
-/*header {
-  background-image: url("https://cdn3.iconfinder.com/data/icons/sound-wave/512/b122_12-512.png")
-}*/
 
 #title {
  text-align: center;

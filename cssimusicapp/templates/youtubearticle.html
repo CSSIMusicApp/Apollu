@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/article.css">
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" target="_blank"></script>
     <!-- <script src="/scripts/youtubeapi.js"></script> -->
     <title>{{name}}</title>
@@ -19,7 +18,7 @@
     </header>
     <div class="flex-container1">
       <div class="flex-item1">
-        <h2>{{ user_username }}</h2>
+        <h2><a href = "/profile?name={{user.username}}">{{ user_username }}</a></h2>
       </div>
       <div class="flex-item2">
         <h1>{{ name }}</h1>

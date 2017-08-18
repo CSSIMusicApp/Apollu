@@ -25,9 +25,8 @@
        <div id="title"></div>
        <!-- {{friends}} -->
        <ul>{%for friend in friends%}
-         <h1><a href = "/profile?name={{friend.followee}}">{{friend.username}}</a></h1>
+         <h1><a href = "/profile?name={{friend.username}}">{{friend.username}}</a></h1>
          {%endfor%}
-         <br>
        </ul>
        <br>
      </div>
@@ -39,11 +38,17 @@
            <input type="hidden" name="name" value="{{name}}"></input>
            <input type="submit" id="addfriend" value="add friend"></input>
          </form>
-         <ul>
-            {%for article in articles%}
-            <h1>{{article.article_name}}</h1>
-            {%endfor%}
-         </ul>
+         {% set player_count = 0 %}
+         {%for article in articles %}
+             {% if article.articletype == 'youtube' %}
+              <h1><a href = "/article?name={{article.article_name}}">{{article.article_name}}</a></h1>
+                <div id="player{{player_count}}"></div>
+                {%set player_count = player_count + 1%}
+             {% else %}
+             <h1><a href = "/article?name={{article.article_name}}">{{article.article_name}}</a></h1>
+             <p>{{article.post}}</p>
+             {%endif%}
+         {%endfor%}
      </div>
      <!-- <div class="flex-item3">
        <div id="title"></div>
@@ -66,5 +71,31 @@
        {{ post_label }}
        {{ login }}
      </ul>
+     <script>
+     var tag = document.createElement('script');
+
+       tag.src = "https://www.youtube.com/iframe_api";
+       var firstScriptTag = document.getElementsByTagName('script')[0];
+       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+     // 3. This function creates an <iframe> (and YouTube player)
+         //    after the API code downloads.
+         var player;
+         function onYouTubeIframeAPIReady() {
+           {% set count = 0 %}
+           {% for article in articles %}
+           {% for id in video_IDs %}
+             {% if article.articletype == 'youtube' and article.post == id%}
+           player = new YT.Player('player{{count}}', {
+             height: '280',
+             width: '100%',
+             videoId: '{{article.post}}'
+           });
+           {%endif%}
+           {%set count = count + 1%}
+          {%endfor%}
+          {%endfor%}
+         }
+     </script>
  </body>
 </html>
