@@ -34,6 +34,7 @@ class User(ndb.Model):
     # image = ndb.StringProperty()
 
 class Comment(ndb.Model):
+    user = ndb.StringProperty()
     comment_data = ndb.StringProperty()
     article = ndb.StringProperty()
     date = ndb.DateTimeProperty()
@@ -72,13 +73,11 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
             #change with database info
         idtemp = randint(0, 1000001)
 
-        user_data = User.query().fetch()
-
-        for current_user in user_data:
-            if current_user.email == user.email:
-                User.email = user.email
-                
-        current_user = User.query(User.email == user.email()).get()
+        currentuser = User.query(User.email == user.email()).get()
+        if not currentuser:
+            currentUserName = ''
+        else:
+            currentUserName = currentuser.username
 
         article = Article(
             article_name = self.request.get('article_name'),
@@ -86,7 +85,7 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
             date = datetime.datetime.now(),
             id = idtemp,
             articletype = articletype,
-            user = current_user.username,
+            user = currentuser.username,
             tags = tagsinput.split(', ')
         )
 
@@ -118,7 +117,7 @@ class UserCreatorHandler(webapp2.RequestHandler):
 
         user.put()
 
-        self.redirect('/loading')
+        self.redirect('/')
 
 class LogOutHandler(webapp2.RequestHandler):
     def get(self):
@@ -211,7 +210,14 @@ class ArticleHandler(webapp2.RequestHandler):
         comment = self.request.get('comment-data')
         article_name = self.request.get('article_name')
 
+        currentuser = User.query(User.email == user.email()).get()
+        if not currentuser:
+            currentUserName = ''
+        else:
+            currentUserName = currentuser.username
+
         comment_data = Comment(
+            user = currentuser.username,
             comment_data = comment,
             article = article_name,
             date = datetime.datetime.now()
@@ -220,9 +226,3 @@ class ArticleHandler(webapp2.RequestHandler):
         comment_data.put()
 
         self.redirect('/article?name=%s' %(article_name))
-
-class LoadingHandler(webapp2.RequestHandler):
-    def get(self):
-        template = env.get_template('loading.html')
-
-        self.response.write(template.render())

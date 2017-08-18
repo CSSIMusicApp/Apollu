@@ -6,36 +6,134 @@ html {
   padding: 0;
 }
 
-.header {
-  height: 65px;
+header {
+    position: relative;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    height: 65px;
+    width: 100%;
+    background: rgb(40, 55, 71);
+    font-family: 'Raleway', sans-serif;
+}
+
+header .header-content {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  	height: 65px;
+    clear: both;
+}
+
+.header-content div {
+    display: block;
+    text-align: center;
+    padding: 24px 20px;
+    text-decoration: none;
+    color: white;
+}
+
+header #friends {
+    position: absolute;
+    left: 15.5%;
+    margin: 0px;
+    padding: 0px;
+    padding-top: 25px;
+    font-size: 18px;
+}
+
+header #apollu {
+    position: absolute;
+    left: 47.3%;
+    font-size: 30px;
+    margin: 0px 0px;
+    padding: 0px;
+    padding-top: 16px;
+}
+
+header #apollu a {
+	text-decoration: none;
+	color: white;
+}
+
+header #interests {
+    position: absolute;
+    right: 14%;
+    top: 0.01px;
+    padding-top: 25px;
+    font-size: 18px;
+}
+
+
+body{
+ margin:0;
+ padding: 0;
+ background: rgb(193, 197, 210);
+}
+
+.flex-container1 {
+   display: inline-block;
+   margin: 0;
+   padding: 0;
+   height: 100%;
+   width: 100%;
+   background: rgb(193, 197, 210);
+   text-decoration: none;
+}
+
+.flex-item1 {
+   height: 100%;
+   width: 33.33%;
+   background: transparent;
+   color: rgb(108,108,109);
+   font-size: 13px;
+   float: left;
+   overflow: scroll, hidden;
+   text-align: center;
+}
+
+.flex-item2 {
+   height: 100%;
+   width: 33.33%;
+   background: transparent;
+   color: rgb(108,108,109);
+   font-size: 17px;
+   float: left;
+   overflow: scroll, hidden;
+   text-align: center;
+}
+
+.flex-item3 {
+   height: 100%;
+   width: 33.33%;
+   background: transparent;
+   color: rgb(108,108,109);
+   font-size: 17px;
+   float: right;
+   overflow: scroll, hidden;
+   text-align: center;
+
+}
+
+#title {
+ text-align: center;
+}
+
+#comment-user {
+  position: relative;
+  left: -25%;
+}
+
+#comment-user-data {
+  position: relative;
+  left: -18%;
+}
+
+
+form input {
+  width: 50%;
   background: rgb(40, 55, 71);
-  margin: 0;
-}
-
-ul {
-  list-style-type: none;
-  text-decoration: none;
-  color: red;
-  margin: 0;
-}
-
-a {
-  margin: 0;
+  border: none;
   color: white;
-  font-family: 'Raleway', sans-serif;
-  text-decoration: none;
-}
-
-#article-name {
-  padding-top: 16px;
-  font-size: 30px;
-}
-
-body {
-  background: rgb(193, 197, 210);
-  color:black;
-  font-size:20px;
-  text-align: center;
-  z-index: 2;
-  margin: 0;
 }
