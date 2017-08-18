@@ -72,8 +72,7 @@ class ArticleCreatorHandler(webapp2.RequestHandler):
 
             #change with database info
         idtemp = randint(0, 1000001)
-
-        currentuser = User.query(User.email == user.email()).get()
+        currentuser = User.query(User.email == users.get_current_user().email()).get()
         if not currentuser:
             currentUserName = ''
         else:
