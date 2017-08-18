@@ -27,6 +27,7 @@
        <ul>{%for friend in friends%}
          <h1><a href = "/profile?name={{friend.followee}}">{{friend.username}}</a></h1>
          {%endfor%}
+         <br>
        </ul>
        <br>
      </div>
@@ -38,6 +39,11 @@
            <input type="hidden" name="name" value="{{name}}"></input>
            <input type="submit" id="addfriend" value="add friend"></input>
          </form>
+         <ul>
+            {%for article in articles%}
+            <h1>{{article.article_name}}</h1>
+            {%endfor%}
+         </ul>
      </div>
      <!-- <div class="flex-item3">
        <div id="title"></div>

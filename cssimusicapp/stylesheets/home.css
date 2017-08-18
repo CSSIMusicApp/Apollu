@@ -8,6 +8,7 @@ body {
  margin:0;
  padding: 0;
  background: rgb(193, 197, 210);
+ overflow: hidden;
 }
 
 .flex-container1 {
@@ -29,6 +30,7 @@ body {
    float: left;
    overflow: scroll, hidden;
    text-align: center;
+   margin-left: -2%;
 }
 
 .flex-item2 {
@@ -40,6 +42,7 @@ body {
    float: left;
    overflow: scroll, hidden;
    text-align: center;
+   margin-left: 1.4%;
 }
 
 .flex-item3 {
@@ -65,10 +68,6 @@ a {
   text-decoration: none;
 }
 
-/*header {
-  background-image: url("https://cdn3.iconfinder.com/data/icons/sound-wave/512/b122_12-512.png")
-}*/
-
 #title {
  text-align: center;
 }
@@ -78,4 +77,8 @@ form input {
   background: rgb(108,108,109);
   border: none;
   color: white;
+}
+input[type=submit] {
+  background: rgb(40, 55, 71);
+  font-family: 'Raleway', sans-serif;
 }

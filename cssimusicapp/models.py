@@ -125,6 +125,7 @@ class LogOutHandler(webapp2.RequestHandler):
         vars = {
             "title": "Name",
             #change
+            "username": "username",
             "login": '<li id="right"><a href="%s">Log In</a></li>' %(users.create_login_url('/usercreate')),
             "post_label": '<li></li>'
         }
@@ -133,17 +134,19 @@ class LogOutHandler(webapp2.RequestHandler):
 
 class ProfileHandler(webapp2.RequestHandler):
     def get(self):
-        usersname = self.request.get('name')
-        usergrabbed = User.query(User.username == usersname)
+        username = self.request.get('name')
+        usergrabbed = User.query(User.username == username)
         user = usergrabbed.get()
         currentuser = User.query(User.email == user.email).get()
-
+        articles = []
+        article_data = Article.query(Article.user == username).order(-Article.date).fetch()
         friends = Friends.query(Friends.follower == currentuser.key).fetch()
         friends_data = []
         for friend in friends:
             # f = User.query(User.key == friend.key).get()
             f = friend.followee.get()
             friends_data.append(f)
+
 
         vars = {
         "name": user.username,
@@ -152,7 +155,7 @@ class ProfileHandler(webapp2.RequestHandler):
         #Friends
         #articles
         #profile pictures
-
+        "articles": article_data,
         "title": "Name",
         "login": '<li id="menu"><a href="%s">Log Out</a></li>' %(users.create_logout_url('/loggedout')),
         "post_label": '<li id="menu"><a href="%s">Post</a></li>' %('/createarticle')
@@ -165,12 +168,14 @@ class ProfileHandler(webapp2.RequestHandler):
         # get follower and followee from database
         followee = User.query(User.username == username).get()
         follower = User.query(User.email == users.get_current_user().email()).get()
+        article_data = Article.query(Article.user == username).order(-Article.date).fetch()
 
         friend = Friends(
             followee= followee.key,
             follower= follower.key
         )
         friend.put()
+        article_data.put()
         self.response.write(followee.username)
 
 
