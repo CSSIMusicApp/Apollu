@@ -35,17 +35,19 @@ class MainHandler(webapp2.RequestHandler):
     #set on main handler too to change value of 'Log In/Log Out'
 
         template = env.get_template('home.html')
-        article_data = Article.query(Article.tags == interestselected).order(-Article.date).fetch(limit=5)
-        video_IDs = list()
 
-    #if logged in(data with post option and "logout") else "LogIn" and keep everything
-
-        for article in article_data:
-            if article.articletype == 'youtube':
-                video_IDs.append(article.post)
 
         user = users.get_current_user()
         if user:
+            article_data = Article.query(Article.tags == interestselected).order(-Article.date).fetch(limit=5)
+            video_IDs = list()
+
+        #if logged in(data with post option and "logout") else "LogIn" and keep everything
+
+            for article in article_data:
+                if article.articletype == 'youtube':
+                    video_IDs.append(article.post)
+
             page_users = []
             articles = []
             user_data = User.query().fetch()
@@ -103,6 +105,15 @@ class MainHandler(webapp2.RequestHandler):
                 "currentinterest": interestselected
             }
         else:
+            article_data = Article.query(Article.tags == interestselected).order(-Article.date).fetch(limit=5)
+            video_IDs = list()
+
+        #if logged in(data with post option and "logout") else "LogIn" and keep everything
+
+            for article in article_data:
+                if article.articletype == 'youtube':
+                    video_IDs.append(article.post)
+                    
             # Not logged in
             page_users = []
             articles = []
