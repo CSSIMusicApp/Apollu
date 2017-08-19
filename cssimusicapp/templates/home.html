@@ -35,10 +35,13 @@
            {% if article.articletype == 'youtube' %}
             <h1><a href = "/article?name={{article.article_name}}">{{article.article_name}}</a></h1>
               <div id="player{{player_count}}"></div>
+              <br>
+              <br>
               {%set player_count = player_count + 1%}
            {% else %}
            <h1><a href = "/article?name={{article.article_name}}">{{article.article_name}}</a></h1>
            <p>{{article.post}}</p>
+           <br>
            {%endif%}
        {%endfor%}
        <form id="show-more-form" action="/?interest={{currentinterest}}" method="post">

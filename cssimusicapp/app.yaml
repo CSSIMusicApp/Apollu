@@ -14,7 +14,7 @@ handlers:
 - url: /stylesheets
   static_dir: stylesheets
 - url: /favicon\.ico
-  static_files: images copy.png
+  static_files: logo.jpg
   upload: favicon\.ico
 
 - url: /createarticle

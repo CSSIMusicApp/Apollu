@@ -9,6 +9,7 @@ body {
  padding: 0;
  background: rgb(193, 197, 210);
  overflow: scroll, hidden;
+ font-family: 'Raleway', sans-serif;
 }
 
 .flex-container1 {

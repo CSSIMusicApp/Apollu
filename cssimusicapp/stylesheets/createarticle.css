@@ -39,6 +39,13 @@ a {
   text-decoration: none;
 }
 
+#apollu-title a:hover {
+  color: white;
+  padding-top: 14px;
+  font-size: 30px;
+  text-decoration: none;
+}
+
 
 
 body {

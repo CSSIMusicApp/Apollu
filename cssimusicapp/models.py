@@ -8,7 +8,6 @@ from random import *
 import logging
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
-user = users.get_current_user()
 
 class Article(ndb.Model):
     article_name = ndb.StringProperty()
@@ -42,11 +41,13 @@ class Comment(ndb.Model):
 
 class ArticleCreatorHandler(webapp2.RequestHandler):
     def get(self):
+        user = users.get_current_user()
         #template variable and html file will change
         template = env.get_template('createarticle.html')
         self.response.write(template.render({"title": 'Name'}))
 
     def post(self):
+        user = users.get_current_user()
         youtubeinput = self.request.get('youtube-data')
         textinput = self.request.get('text-data')
         tagsinput = self.request.get('tags').lower() + ", all"
@@ -181,9 +182,10 @@ class ProfileHandler(webapp2.RequestHandler):
 
     def post(self):
         username = self.request.get('name')
+        user = users.get_current_user()
         # get follower and followee from database
         followee = User.query(User.username == username).get()
-        follower = User.query(User.email == users.get_current_user().email()).get()
+        follower = User.query(User.email == user.email()).get()
         article_data = Article.query(Article.user == username).order(-Article.date).fetch()
 
         friend = Friends(
@@ -191,13 +193,13 @@ class ProfileHandler(webapp2.RequestHandler):
             follower= follower.key
         )
         friend.put()
-        article_data.put()
-        self.response.write(followee.username)
+        self.redirect("/profile?name=%s" %(username))
 
 
 
 class ArticleHandler(webapp2.RequestHandler):
     def get(self):
+        user = users.get_current_user()
         articlename = self.request.get('name')
         articlegrabbed = Article.query(Article.article_name == articlename)
         article = articlegrabbed.get()
@@ -228,22 +230,38 @@ class ArticleHandler(webapp2.RequestHandler):
         self.response.write(template.render(vars))
 
     def post(self):
+        user = users.get_current_user()
         comment = self.request.get('comment-data')
         article_name = self.request.get('article_name')
 
-        currentuser = User.query(User.email == user.email()).get()
-        if not currentuser:
-            currentUserName = ''
+        if user:
+            currentuser = User.query(User.email == user.email()).get()
+
+            print currentuser
+
+            comment_data = Comment(
+                user = currentuser.username,
+                comment_data = comment,
+                article = article_name,
+                date = datetime.datetime.now()
+            )
+
+            comment_data.put()
         else:
-            currentUserName = currentuser.username
+            currentuser = {
+            "username": "Blank",
+            "interests": ["Log in to see your interests."]
+            }
 
-        comment_data = Comment(
-            user = currentuser.username,
-            comment_data = comment,
-            article = article_name,
-            date = datetime.datetime.now()
-        )
+            print currentuser
 
-        comment_data.put()
+            comment_data = Comment(
+                user = currentuser['username'],
+                comment_data = comment,
+                article = article_name,
+                date = datetime.datetime.now()
+            )
+
+            comment_data.put()
 
         self.redirect('/article?name=%s' %(article_name))
